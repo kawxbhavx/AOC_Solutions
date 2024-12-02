@@ -25,14 +25,20 @@ reports.forEach(function(report) {
 });
 //console.log(reportsGradients);
 
+safeReports1 = [];
+safeReportsIndices1 = [];
 changedReportGradients = [];
 for(let i = 0; i < reportsGradients.length; i++) {
   if(!reportsGradients[i].includes(0)) {
     changedReportGradients.push(reportsGradients[i]);
+    safeReports1.push(reports[i]);
+    safeReportsIndices1.push(i);
   }
 }
 
-safeReportsByGradientsDirection = [];
+safeReports2 = [];
+safeReportsIndices2 = [];
+safeGradientsDirection = [];
 for(let i = 0; i < changedReportGradients.length; i++) {
   direction = 1;
   levelGradients = changedReportGradients[i];
@@ -47,13 +53,17 @@ for(let i = 0; i < changedReportGradients.length; i++) {
     }
   }
   if(safeGradients) {
-    safeReportsByGradientsDirection.push(levelGradients);
+    safeGradientsDirection.push(levelGradients);
+    safeReports2.push(safeReports1[i]);
+    safeReportsIndices2.push(safeReportsIndices1[i]);
   }
 }
-//console.log(safeReportsByGradientsDirection);
+//console.log(safeGradientsDirection);
 
+safeReports3 = [];
+safeReportsIndices3 = [];
 safeGradients = [];
-safeReportsByGradientsDirection.forEach(function(levelGradients) {
+safeGradientsDirection.forEach(function(levelGradients, levelGradientsIndex) {
   absoluteLevelGradients = [];
   levelGradients.forEach(function(levelGradient) {
     absoluteLevelGradient = Math.abs(levelGradient);
@@ -65,6 +75,8 @@ safeReportsByGradientsDirection.forEach(function(levelGradients) {
   absoluteLevelGradients.reverse();
   if(!(absoluteLevelGradients[0]>3)) {
     safeGradients.push(absoluteLevelGradients);
+    safeReports3.push(safeReports2[levelGradientsIndex]);
+    safeReportsIndices3.push(safeReportsIndices2[levelGradientsIndex]);
   }
 });
 console.log(safeGradients.length);
