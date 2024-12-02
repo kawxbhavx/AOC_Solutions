@@ -11,7 +11,9 @@ reportsStr.forEach(function(reportStr) {
       report.push(level);
     }    
   });
-  reports.push(report);
+  if(report.length>0) {
+    reports.push(report);
+  }
 });
 //console.log(reports);
 
@@ -81,3 +83,4 @@ safeGradientsDirection.forEach(function(levelGradients, levelGradientsIndex) {
 });
 console.log(safeGradients.length);
   
+//part2
