@@ -128,7 +128,9 @@ function isSafeReport(inputReport, reportIndex) {
         absoluteLevelGradients.push(absoluteLevelGradient);
       }
     });
-    absoluteLevelGradients.sort();
+    absoluteLevelGradients.sort(function(a, b) {
+      return a - b;
+    });
     absoluteLevelGradients.reverse();
     if(!(absoluteLevelGradients[0]>3)) {
       return true;
@@ -156,9 +158,9 @@ reports.forEach(function(report,reportIndex) {
 
 dampedSafeReports = [];
 unSafeReports.forEach(function(report,reportIndex) {    
-  if(unSafeReportsIndices[reportIndex]===94 || unSafeReportsIndices[reportIndex]===218 || unSafeReportsIndices[reportIndex]===368) {
+  /*if(unSafeReportsIndices[reportIndex]===94 || unSafeReportsIndices[reportIndex]===218 || unSafeReportsIndices[reportIndex]===368) {
     debugger;
-  }
+  }*/
   for(let i=0; i<report.length; i++) {    
     dampedReport = [...report];
     dampedReport.splice(i,1);
