@@ -101,7 +101,7 @@ reportsStr.forEach(function(reportStr) {
   }
 });
 
-function isSafeReport(inputReport) {
+function isSafeReport(inputReport, reportIndex) {
   levelGradients = [];
   for(let i=0; i<inputReport.length-1; i++) {
     levelGradients.push(inputReport[i]-inputReport[i+1]);
@@ -145,7 +145,7 @@ safeReportsIndices = [];
 unSafeReports = [];
 unSafeReportsIndices = [];
 reports.forEach(function(report,reportIndex) {
-  if(isSafeReport(report)) {
+  if(isSafeReport(report, reportIndex)) {
     safeReports.push(report);
     safeReportsIndices.push(reportIndex);
   } else {
@@ -154,17 +154,18 @@ reports.forEach(function(report,reportIndex) {
   }
 });
 
-unSafeReports.forEach(function(report,reportIndex) {
-  for(let i=0; i<report.length; i++) {
-    for(let j=0; j<report.length; j++) {
-      modifiedReport = [];
-      if(i!=j) {
-        modifiedReport.push(report[j]);
-      }
-    }
-    if(isSafeReport(modifiedReport)) {
+dampedSafeReports = [];
+unSafeReports.forEach(function(report,reportIndex) {    
+  if(unSafeReportsIndices[reportIndex]===94 || unSafeReportsIndices[reportIndex]===218 || unSafeReportsIndices[reportIndex]===368) {
+    debugger;
+  }
+  for(let i=0; i<report.length; i++) {    
+    dampedReport = [...report];
+    dampedReport.splice(i,1);
+    if(isSafeReport(dampedReport, reportIndex)) {
       safeReports.push(report);
       safeReportsIndices.push(unSafeReportsIndices[reportIndex]);      
+      dampedSafeReports.push(dampedReport);
       break;
     }      
   }
