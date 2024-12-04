@@ -24,33 +24,38 @@ console.log(X_count + " " + M_count + " " + A_count + " " + S_count + " " + (X_c
 
 //part1
 patternInput = document.querySelector('pre').innerText;
-pattern = patternInput.split("\n");
-pattern.pop();
+patternRows = patternInput.split("\n");
+patternRows.pop();
+pattern = [];
+for(let row = 0;row<patternRows.length;row++) {
+  pattern.push(patternRows[row].split(""));
+}
+
 for(let row = 1;row<pattern.length-1;row++) {
   for(let col = 1;col<pattern[0].length-1;col++) {
-    if(pattern[row][col]=="X") {
-      if(pattern[row][col-1]=="M") {
+    if(pattern[row][col]==="X") {
+      if(pattern[row][col-1]==="M") {
         pattern[row][col-1]=="1";
       }
-      if(pattern[row-1][col-1]=="M") {
+      if(pattern[row-1][col-1]==="M") {
         pattern[row-1][col-1]=="1";
       }
-      if(pattern[row-1][col]=="M") {
+      if(pattern[row-1][col]==="M") {
         pattern[row-1][col]=="1";
       }
-      if(pattern[row-1][col+1]=="M") {
+      if(pattern[row-1][col+1]==="M") {
         pattern[row-1][col+1]=="1";
       }
-      if(pattern[row][col+1]=="M") {
+      if(pattern[row][col+1]==="M") {
         pattern[row][col+1]=="1";
       }
-      if(pattern[row+1][col+1]=="M") {
+      if(pattern[row+1][col+1]==="M") {
         pattern[row+1][col+1]=="1";
       }
-      if(pattern[row+1][col]=="M") {
+      if(pattern[row+1][col]==="M") {
         pattern[row+1][col]=="1";
       }
-      if(pattern[row+1][col-1]=="M") {
+      if(pattern[row+1][col-1]==="M") {
         pattern[row+1][col-1]=="1";
       }
     }
@@ -60,7 +65,7 @@ for(let row = 1;row<pattern.length-1;row++) {
 count=0;
 for(let row = 0;row<pattern.length;row++) {
   for(let col = 0;col<pattern[0].length;col++) {
-    if(pattern[row][col]=="1") {
+    if(pattern[row][col]==="1") {
       count++;
     }
   }
