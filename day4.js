@@ -31,41 +31,58 @@ for(let row = 0;row<patternRows.length;row++) {
   pattern.push(patternRows[row].split(""));
 }
 
+function markMatchingPattern(row,col,previousCharacter, nextCharacter, replacementCharacter) {
+  if(pattern[row][col]===previousCharacter) {
+    if(pattern[row][col-1]===nextCharacter) {
+      pattern[row][col-1]=replacementCharacter;
+    }
+    if(pattern[row-1][col-1]===nextCharacter) {
+      pattern[row-1][col-1]=replacementCharacter;
+    }
+    if(pattern[row-1][col]===nextCharacter) {
+      pattern[row-1][col]=replacementCharacter;
+    }
+    if(pattern[row-1][col+1]===nextCharacter) {
+      pattern[row-1][col+1]=replacementCharacter;
+    }
+    if(pattern[row][col+1]===nextCharacter) {
+      pattern[row][col+1]=replacementCharacter;
+    }
+    if(pattern[row+1][col+1]===nextCharacter) {
+      pattern[row+1][col+1]=replacementCharacter;
+    }
+    if(pattern[row+1][col]===nextCharacter) {
+      pattern[row+1][col]=replacementCharacter;
+    }
+    if(pattern[row+1][col-1]===nextCharacter) {
+      pattern[row+1][col-1]=replacementCharacter;
+    }
+  }
+}
+
+
 for(let row = 1;row<pattern.length-1;row++) {
   for(let col = 1;col<pattern[0].length-1;col++) {
-    if(pattern[row][col]==="X") {
-      if(pattern[row][col-1]==="M") {
-        pattern[row][col-1]=="1";
-      }
-      if(pattern[row-1][col-1]==="M") {
-        pattern[row-1][col-1]=="1";
-      }
-      if(pattern[row-1][col]==="M") {
-        pattern[row-1][col]=="1";
-      }
-      if(pattern[row-1][col+1]==="M") {
-        pattern[row-1][col+1]=="1";
-      }
-      if(pattern[row][col+1]==="M") {
-        pattern[row][col+1]=="1";
-      }
-      if(pattern[row+1][col+1]==="M") {
-        pattern[row+1][col+1]=="1";
-      }
-      if(pattern[row+1][col]==="M") {
-        pattern[row+1][col]=="1";
-      }
-      if(pattern[row+1][col-1]==="M") {
-        pattern[row+1][col-1]=="1";
-      }
-    }
+    markMatchingPattern(row,col,"X","M","1");
+  }
+}
+
+for(let row = 1;row<pattern.length-1;row++) {
+  for(let col = 1;col<pattern[0].length-1;col++) {
+    markMatchingPattern(row,col,"1","A","2");
+  }
+}
+
+for(let row = 1;row<pattern.length-1;row++) {
+  for(let col = 1;col<pattern[0].length-1;col++) {
+    markMatchingPattern(row,col,"2","S","3");
   }
 }
 
 count=0;
 for(let row = 0;row<pattern.length;row++) {
   for(let col = 0;col<pattern[0].length;col++) {
-    if(pattern[row][col]==="1") {
+    if(pattern[row][col]==="3") {
       count++;
     }
   }
