@@ -91,6 +91,7 @@ console.log(count);
 
 
 //part1 
+patternInput = "MMMSXXMASM\nMSAMXMSMSA\nAMXSXMAAMM\nMSAMASMSMX\nXMASAMXAMM\nXXAMMXXAMA\nSMSMSASXSS\nSAXAMASAAA\nMAMMMXMMMM\nMXMXAXMASX\n";
 patternInput = document.querySelector('pre').innerText;
 patternRows = patternInput.split("\n");
 patternRows.pop();
