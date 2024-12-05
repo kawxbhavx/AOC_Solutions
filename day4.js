@@ -144,9 +144,23 @@ pattern.unshift(" ".repeat(pattern[0].length));
 pattern.push(" ".repeat(pattern[0].length));
 pattern.push(" ".repeat(pattern[0].length));
 pattern.push(" ".repeat(pattern[0].length));
-count=0;
-for(let row = 3;row<pattern.length-4;row++) {
-  for(let col =3;col<pattern[row].length-4;col++) {
-    
+count_1=0;
+count_2=0;
+count_3=0;
+count_4=0;
+count_5=0;
+count_6=0;
+count_7=0;
+count_8=0;
+for(let row = 3;row<pattern.length-3;row++) {
+  for(let col = 3;col<pattern[row].length-4;col++) {
+    if(pattern[row][col]==='X') {
+      if((row===3 && col===8) || (row===7 && col===3) || (row===12 && col===8)) {
+        debugger;
+      }
+      if(pattern[row][col+1] + pattern[row][col+2] + pattern[row][col+3] === "MAS") {
+        count_1++;
+      }
+    }
   }
 }
