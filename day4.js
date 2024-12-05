@@ -155,11 +155,32 @@ count_8=0;
 for(let row = 3;row<pattern.length-3;row++) {
   for(let col = 3;col<pattern[row].length-4;col++) {
     if(pattern[row][col]==='X') {
-      if((row===3 && col===8) || (row===7 && col===3) || (row===12 && col===8)) {
+      /*if((row===3 && col===8) || (row===7 && col===3) || (row===12 && col===8)) {
         debugger;
-      }
+      }*/
       if(pattern[row][col+1] + pattern[row][col+2] + pattern[row][col+3] === "MAS") {
         count_1++;
+      }
+      if(pattern[row+1][col+1] + pattern[row+2][col+2] + pattern[row+3][col+3] === "MAS") {
+        count_2++;
+      }
+      if(pattern[row+1][col] + pattern[row+2][col] + pattern[row+3][col] === "MAS") {
+        count_3++;
+      }
+      if(pattern[row+1][col-1] + pattern[row+2][col-2] + pattern[row+3][col-3] === "MAS") {
+        count_4++;
+      }
+      if(pattern[row][col-1] + pattern[row][col-2] + pattern[row][col-3] === "MAS") {
+        count_5++;
+      }
+      if(pattern[row-1][col-1] + pattern[row-2][col-2] + pattern[row-3][col-3] === "MAS") {
+        count_6++;
+      }
+      if(pattern[row-1][col] + pattern[row-2][col] + pattern[row-3][col] === "MAS") {
+        count_7++;
+      }
+      if(pattern[row-1][col-1] + pattern[row-2][col-2] + pattern[row-3][col-3] === "MAS") {
+        count_8++;
       }
     }
   }
