@@ -92,6 +92,7 @@ console.log(count);
 
 //part1 
 patternInput = "MMMSXXMASM\nMSAMXMSMSA\nAMXSXMAAMM\nMSAMASMSMX\nXMASAMXAMM\nXXAMMXXAMA\nSMSMSASXSS\nSAXAMASAAA\nMAMMMXMMMM\nMXMXAXMASX\n";
+patternInput = "....XXMAS.\n.SAMXMS...\n...S..A...\n..A.A.MS.X\nXMASAMX.MM\nX.....XA.A\nS.S.S.S.SS\n.A.A.A.A.A\n..M.M.M.MM\n.X.X.XMASX\n";
 patternInput = document.querySelector('pre').innerText;
 patternRows = patternInput.split("\n");
 patternRows.pop();
@@ -111,8 +112,8 @@ for(let row = 0;row<patternRows.length-3;row++) {
     pattern.push(patternRows[row][col] + patternRows[row+1][col+1] + patternRows[row+2][col+2] + patternRows[row+3][col+3]);
   }  
 }
-for(let row = 0;row<patternRows.length-4;row++) {
-  for(let col = 3;col<patternRows[row].length-1;col++) {
+for(let row = 0;row<patternRows.length-3;row++) {
+  for(let col = 3;col<patternRows[row].length;col++) {
       pattern.push(patternRows[row+3][col-3] + patternRows[row+2][col-2] + patternRows[row+1][col-1] + patternRows[row][col]);
   }
 }
