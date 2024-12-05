@@ -108,14 +108,14 @@ for(let col = 0;col<patternRows[0].length;col++) {
 }
 for(let row = 0;row<patternRows.length-3;row++) {
   diagStr = "";
-  for(let col = 0;col<patternRows[row].length-3;col++) {
+  for(let col = 0;col<patternRows[row].length-4;col++) {
     diagStr = diagStr + patternRows[row][col] + patternRows[row+1][col+1] + patternRows[row+2][col+2] + patternRows[row+3][col+3];
   }
   pattern.push(diagStr);
 }
-for(let row = 0;row<patternRows.length-3;row++) {
+for(let row = 0;row<patternRows.length-4;row++) {
   diagStr = "";
-  for(let col = 3;col<patternRows[row].length-1;col++) {
+  for(let col = 3;col<patternRows[row].length;col++) {
     diagStr = patternRows[row+3][col-3] + patternRows[row+2][col-2] + patternRows[row+1][col-1] + patternRows[row][col] + diagStr;
   }
   pattern.push(diagStr);
