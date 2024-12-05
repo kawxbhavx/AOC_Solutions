@@ -22,7 +22,7 @@ for(let row = 0;row<pattern.length;row++) {
 console.log(X_count + " " + M_count + " " + A_count + " " + S_count + " " + (X_count + M_count + A_count + S_count) + " " + (140*140));
 
 
-//part1
+//part1 misinterpreted
 patternInput = document.querySelector('pre').innerText;
 patternRows = patternInput.split("\n");
 patternRows.pop();
@@ -88,3 +88,36 @@ for(let row = 0;row<pattern.length;row++) {
   }
 }
 console.log(count);
+
+
+//part1 
+patternInput = document.querySelector('pre').innerText;
+patternRows = patternInput.split("\n");
+patternRows.pop();
+pattern = [];
+for(let row = 0;row<patternRows.length;row++) {
+  pattern.push(patternRows[row]);
+}
+for(let col = 0;col<patternRows[0].length;col++) {
+  colStr = "";
+  for(let row = 0;row<patternRows.length;row++) {
+    colStr = colStr + patternRows[row][col];
+  }
+  pattern.push(colStr);
+}
+for(let row = 0;row<patternRows.length-4;row++) {
+  diagStr = "";
+  for(let col = 0;col<patternRows[row].length-4;col++) {
+    diagStr = diagStr + patternRows[row][col] + patternRows[row+1][col+1] + patternRows[row+2][col+2] + patternRows[row+3][col+3];
+  }
+  pattern.push(diagStr);
+}
+for(let row = 0;row<patternRows.length-4;row++) {
+  diagStr = "";
+  for(let col = 3;col<patternRows[row].length-1;col++) {
+    diagStr = diagStr + patternRows[row][col] + patternRows[row+1][col-1] + patternRows[row+2][col-2] + patternRows[row+3][col-3];
+  }
+  pattern.push(diagStr);
+}
+pattern = pattern.join("");
+console.log(pattern.match(/XMAS|SAMX/g).length);
