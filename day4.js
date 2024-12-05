@@ -106,19 +106,19 @@ for(let col = 0;col<patternRows[0].length;col++) {
   }
   pattern.push(colStr);
 }
-for(let row = 0;row<patternRows.length-4;row++) {
+for(let row = 0;row<patternRows.length-3;row++) {
   diagStr = "";
-  for(let col = 0;col<patternRows[row].length-4;col++) {
+  for(let col = 0;col<patternRows[row].length-3;col++) {
     diagStr = diagStr + patternRows[row][col] + patternRows[row+1][col+1] + patternRows[row+2][col+2] + patternRows[row+3][col+3];
   }
   pattern.push(diagStr);
 }
-for(let row = 0;row<patternRows.length-4;row++) {
+for(let row = 0;row<patternRows.length-3;row++) {
   diagStr = "";
   for(let col = 3;col<patternRows[row].length-1;col++) {
-    diagStr = diagStr + patternRows[row][col] + patternRows[row+1][col-1] + patternRows[row+2][col-2] + patternRows[row+3][col-3];
+    diagStr = patternRows[row+3][col-3] + patternRows[row+2][col-2] + patternRows[row+1][col-1] + patternRows[row][col] + diagStr;
   }
   pattern.push(diagStr);
 }
-pattern = pattern.join("");
-console.log(pattern.match(/XMAS|SAMX/g).length);
+patternStr = pattern.join("");
+console.log(patternStr.match(/XMAS|SAMX/g).length);
