@@ -128,3 +128,25 @@ for(let index=0;index<patternStr.length-4;index++) {
 }
 console.log(count);
 
+//padding approach
+patternInput = "MMMSXXMASM\nMSAMXMSMSA\nAMXSXMAAMM\nMSAMASMSMX\nXMASAMXAMM\nXXAMMXXAMA\nSMSMSASXSS\nSAXAMASAAA\nMAMMMXMMMM\nMXMXAXMASX\n";
+patternInput = "....XXMAS.\n.SAMXMS...\n...S..A...\n..A.A.MS.X\nXMASAMX.MM\nX.....XA.A\nS.S.S.S.SS\n.A.A.A.A.A\n..M.M.M.MM\n.X.X.XMASX\n";
+patternInput = document.querySelector('pre').innerText;
+patternRows = patternInput.split("\n");
+patternRows.pop();
+pattern = [];
+for(let row=0;row<patternRows.length;row++) {
+  pattern.push("   " + patternRows[row] + "   ");
+}
+pattern.unshift(" ".repeat(pattern[0].length));
+pattern.unshift(" ".repeat(pattern[0].length));
+pattern.unshift(" ".repeat(pattern[0].length));
+pattern.push(" ".repeat(pattern[0].length));
+pattern.push(" ".repeat(pattern[0].length));
+pattern.push(" ".repeat(pattern[0].length));
+count=0;
+for(let row = 3;row<pattern.length-4;row++) {
+  for(let col =3;col<pattern[row].length-4;col++) {
+    
+  }
+}
