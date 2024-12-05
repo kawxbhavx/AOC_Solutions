@@ -153,7 +153,7 @@ count_6=0;
 count_7=0;
 count_8=0;
 for(let row = 3;row<pattern.length-3;row++) {
-  for(let col = 3;col<pattern[row].length-4;col++) {
+  for(let col = 3;col<pattern[row].length-3;col++) {
     if(pattern[row][col]==='X') {
       /*if((row===3 && col===8) || (row===7 && col===3) || (row===12 && col===8)) {
         debugger;
