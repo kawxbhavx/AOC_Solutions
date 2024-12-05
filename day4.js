@@ -187,3 +187,32 @@ for(let row = 3;row<pattern.length-3;row++) {
 }
 console.log(count_1 + "," + count_2 + "," + count_3 + "," + count_4 + "," + count_5 + "," + count_6 + "," + count_7 + "," + count_8);
 console.log(count_1 + count_2 + count_3 + count_4 + count_5 + count_6 + count_7 + count_8);
+
+//part2
+patternInput = document.querySelector('pre').innerText;
+pattern = patternInput.split("\n");
+pattern.pop();
+count_1=0;
+count_2=0;
+count_3=0;
+count_4=0;
+for(let row = 1;row<pattern.length-1;row++) {
+  for(let col = 1;col<pattern[row].length-1;col++) {
+    if(pattern[row][col]==='A') {
+      if(pattern[row-1][col-1]==="M" && pattern[row+1][col+1]==="A" && pattern[row+1][col-1]==="M" && pattern[row-1][col+1]==="A") {
+        count_1++;
+      }
+      if(pattern[row+1][col-1]==="M" && pattern[row-1][col+1]==="A" && pattern[row+1][col+1]==="M" && pattern[row-1][col-1]==="A") {
+        count_2++;
+      }
+      if(pattern[row+1][col+1]==="M" && pattern[row-1][col-1]==="A" && pattern[row-1][col+1]==="M" && pattern[row+1][col-1]==="A") {
+        count_3++;
+      }
+      if(pattern[row-1][col+1]==="M" && pattern[row+1][col-1]==="A" && pattern[row-1][col-1]==="M" && pattern[row+1][col+1]==="A") {
+        count_4++;
+      }
+    }
+  }
+}
+console.log(count_1 + "," + count_2 + "," + count_3 + "," + count_4);
+console.log(count_1 + count_2 + count_3 + count_4);
