@@ -164,3 +164,5 @@ for(let row = 3;row<pattern.length-3;row++) {
     }
   }
 }
+console.log(count_1 + "," + count_2 + "," + count_3 + "," + count_4 + "," + count_5 + "," + count_6 + "," + count_7 + "," + count_8);
+console.log(count_1 + count_2 + count_3 + count_4 + count_5 + count_6 + count_7 + count_8);
