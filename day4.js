@@ -128,7 +128,7 @@ for(let index=0;index<patternStr.length-4;index++) {
 }
 console.log(count);
 
-//padding approach
+//padding approach //2527 vs 2543
 patternInput = "MMMSXXMASM\nMSAMXMSMSA\nAMXSXMAAMM\nMSAMASMSMX\nXMASAMXAMM\nXXAMMXXAMA\nSMSMSASXSS\nSAXAMASAAA\nMAMMMXMMMM\nMXMXAXMASX\n";
 patternInput = "....XXMAS.\n.SAMXMS...\n...S..A...\n..A.A.MS.X\nXMASAMX.MM\nX.....XA.A\nS.S.S.S.SS\n.A.A.A.A.A\n..M.M.M.MM\n.X.X.XMASX\n";
 patternInput = document.querySelector('pre').innerText;
