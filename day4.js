@@ -118,4 +118,13 @@ for(let row = 0;row<patternRows.length-3;row++) {
   }
 }
 patternStr = pattern.join("");
-console.log(patternStr.match(/XMAS|SAMX/g).length);
+//console.log((patternStr.match(/XMAS/g).length + patternStr.match(/SAMX/g).length));
+count = 0;
+for(let index=0,index<patternStr.length-4;index++) {
+  matchStr=patternStr.substring(index,index+4);
+  if(matchStr==="XMAS" || matchStr==="SAMX") {
+    count++;
+  }
+}
+console.log(count);
+
