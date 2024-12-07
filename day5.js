@@ -19,11 +19,7 @@ let sortedRules=[];
 rulesStr.forEach(function(rule) {
   let ruleList = [];
   rule.split("|").forEach(function(ruleEntry) {
-    let currentRule=parseInt(ruleEntry);
-    ruleList.push(currentRule);
-    if(!sortedRules.includes(currentRule)) {
-      sortedRules.push(currentRule);
-    }
+    ruleList.push(parseInt(ruleEntry));    
   });
   rules.push(ruleList);
 });
@@ -36,7 +32,17 @@ updatesStr.forEach(function(update) {
   updates.push(updateList);
 });
 
-
+for(let ruleIndex=0;ruleIndex<rules.length-1;ruleIndex++) {
+  let dependency=rules[ruleIndex][0];
+  let dependent=rules[ruleIndex][1];
+  if(sortedRules.includes(dependency)) {     
+    let dependencyIndex = sortedRules.indexOf(dependency);
+    
+  } else {
+    
+    sortedRules.push(currentRule);
+  }
+}
 
 
 let validUpdates=[];
