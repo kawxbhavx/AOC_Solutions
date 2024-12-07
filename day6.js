@@ -49,7 +49,7 @@ while(row>=0 && row<pattern.length && col>=0 && col<pattern[0].length) {
         pattern[row][col] = "X";
       }
     } else if(direction==="left") {
-      if(pattern[row+1][col]==="#") {
+      if(pattern[row][col-1]==="#") {
         direction="up";
       } else {
         col--;
@@ -57,5 +57,17 @@ while(row>=0 && row<pattern.length && col>=0 && col<pattern[0].length) {
       }
     }
   } catch (err) {
+    break;
   }
 }
+
+for(let row=0;row<pattern.length;row++) {
+  pattern[row] = pattern[row].join("");
+}
+pattern = pattern.join("\n");
+document.querySelector('pre').innerText = pattern;
+pattern.match(/X/g).length;
+
+
+//part2
+
