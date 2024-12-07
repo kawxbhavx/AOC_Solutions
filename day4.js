@@ -270,30 +270,70 @@ console.log(count);
 
 
 //part2
-patternInput = document.querySelector('pre').innerText;
+// patternInput = "MMMSXXMASM\nMSAMXMSMSA\nAMXSXMAAMM\nMSAMASMSMX\nXMASAMXAMM\nXXAMMXXAMA\nSMSMSASXSS\nSAXAMASAAA\nMAMMMXMMMM\nMXMXAXMASX\n";
+let preNode=document.querySelector('pre');
+// preNode.innerText = patternInput;
+patternInput = preNode.innerText;
 pattern = patternInput.split("\n");
 pattern.pop();
-count_1=0;
-count_2=0;
-count_3=0;
-count_4=0;
+count=0;
+counts=[];
+let patterns=[];
+for(let patternNum=1;patternNum<=4;patternNum++) {
+  let filteredPattern=[];
+  for(let row=0;row<pattern.length;row++) {
+    filteredPattern.push(".".repeat(pattern[0].length).split(""));
+  }
+  counts[patternNum]=0;
+  patterns[patternNum]=filteredPattern;  
+}
 for(let row = 1;row<pattern.length-1;row++) {
   for(let col = 1;col<pattern[row].length-1;col++) {
     if(pattern[row][col]==='A') {
       if(pattern[row-1][col-1]==="M" && pattern[row+1][col+1]==="A" && pattern[row+1][col-1]==="M" && pattern[row-1][col+1]==="A") {
-        count_1++;
+        counts[1]++;
+        patterns[1][row][col]="X";
+        patterns[1][row-1][col-1]="M";
+        patterns[1][row+1][col+1]="A";
+        patterns[1][row+1][col-1]="M";
+        patterns[1][row-1][col+1]="A";
       }
       if(pattern[row+1][col-1]==="M" && pattern[row-1][col+1]==="A" && pattern[row+1][col+1]==="M" && pattern[row-1][col-1]==="A") {
-        count_2++;
+        counts[2]++;
+        patterns[2][row][col]="X";
+        patterns[2][row+1][col-1]="M";
+        patterns[2][row-1][col+1]="A";
+        patterns[2][row+1][col+1]="M";
+        patterns[2][row-1][col-1]="A";
       }
       if(pattern[row+1][col+1]==="M" && pattern[row-1][col-1]==="A" && pattern[row-1][col+1]==="M" && pattern[row+1][col-1]==="A") {
-        count_3++;
+        counts[3]++;
+        patterns[3][row][col]="X";
+        patterns[3][row+1][col+1]="M";
+        patterns[3][row-1][col-1]="A";
+        patterns[3][row-1][col+1]="M";
+        patterns[3][row+1][col-1]="A";
       }
       if(pattern[row-1][col+1]==="M" && pattern[row+1][col-1]==="A" && pattern[row-1][col-1]==="M" && pattern[row+1][col+1]==="A") {
-        count_4++;
+        counts[4]++;
+        patterns[4][row][col]="X";
+        patterns[4][row-1][col+1]="M";
+        patterns[4][row+1][col-1]="A";
+        patterns[4][row-1][col-1]="M";
+        patterns[4][row+1][col+1]="A";
       }
     }
   }
 }
-console.log(count_1 + "," + count_2 + "," + count_3 + "," + count_4);
-console.log(count_1 + count_2 + count_3 + count_4);
+for(let patternNum=1;patternNum<=4;patternNum++) {
+  count = count + counts[patternNum];
+  console.log(patternNum + ":" + counts[patternNum]);
+  for(let row=0;row<patterns[patternNum].length;row++) {
+    patterns[patternNum][row] = patterns[patternNum][row].join("");
+  }
+  patterns[patternNum] = patterns[patternNum].join("\n");
+  let preNodeNew=preNode.cloneNode(true);
+  preNodeNew.innerText=patterns[patternNum];
+  document.querySelector('body').appendChild(preNodeNew);
+}
+console.log(count);
