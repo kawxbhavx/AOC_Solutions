@@ -202,22 +202,22 @@ for(let row = 3;row<pattern.length;row++) {
         counts[6]++;
         patterns[6][row][col]="X";
         patterns[6][row-1][col-1]="M";
-        patterns[6][row-1][col-2]="A";
-        patterns[6][row-1][col-3]="S";
+        patterns[6][row-2][col-2]="A";
+        patterns[6][row-3][col-3]="S";
       }
       if(pattern[row-1][col] + pattern[row-2][col] + pattern[row-3][col] === "MAS") {
         counts[7]++;
         patterns[7][row][col]="X";
         patterns[7][row-1][col]="M";
-        patterns[7][row-1][col]="A";
-        patterns[7][row-1][col]="S";
+        patterns[7][row-2][col]="A";
+        patterns[7][row-3][col]="S";
       }
-      if(pattern[row-1][col-1] + pattern[row-2][col-2] + pattern[row-3][col-3] === "MAS") {
+      if(pattern[row-1][col+1] + pattern[row-2][col+2] + pattern[row-3][col+3] === "MAS") {
         counts[8]++;
         patterns[8][row][col]="X";
-        patterns[8][row-1][col-1]="M";
-        patterns[8][row-1][col-2]="A";
-        patterns[8][row-1][col-3]="S";
+        patterns[8][row-1][col+1]="M";
+        patterns[8][row-2][col+2]="A";
+        patterns[8][row-3][col+3]="S";
       }
     }
   }
