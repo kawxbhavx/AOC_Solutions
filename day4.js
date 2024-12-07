@@ -247,28 +247,6 @@ for(let patternNum=1;patternNum<=8;patternNum++) {
 }
 console.log(count);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //part2
 // patternInput = "MMMSXXMASM\nMSAMXMSMSA\nAMXSXMAAMM\nMSAMASMSMX\nXMASAMXAMM\nXXAMMXXAMA\nSMSMSASXSS\nSAXAMASAAA\nMAMMMXMMMM\nMXMXAXMASX\n";
 let preNode=document.querySelector('pre');
@@ -290,37 +268,37 @@ for(let patternNum=1;patternNum<=4;patternNum++) {
 for(let row = 1;row<pattern.length-1;row++) {
   for(let col = 1;col<pattern[row].length-1;col++) {
     if(pattern[row][col]==='A') {
-      if(pattern[row-1][col-1]==="M" && pattern[row+1][col+1]==="A" && pattern[row+1][col-1]==="M" && pattern[row-1][col+1]==="A") {
+      if(pattern[row-1][col-1]==="M" && pattern[row+1][col+1]==="S" && pattern[row+1][col-1]==="M" && pattern[row-1][col+1]==="S") {
         counts[1]++;
         patterns[1][row][col]="X";
         patterns[1][row-1][col-1]="M";
-        patterns[1][row+1][col+1]="A";
+        patterns[1][row+1][col+1]="S";
         patterns[1][row+1][col-1]="M";
-        patterns[1][row-1][col+1]="A";
+        patterns[1][row-1][col+1]="S";
       }
-      if(pattern[row+1][col-1]==="M" && pattern[row-1][col+1]==="A" && pattern[row+1][col+1]==="M" && pattern[row-1][col-1]==="A") {
+      if(pattern[row+1][col-1]==="M" && pattern[row-1][col+1]==="S" && pattern[row+1][col+1]==="M" && pattern[row-1][col-1]==="S") {
         counts[2]++;
         patterns[2][row][col]="X";
         patterns[2][row+1][col-1]="M";
-        patterns[2][row-1][col+1]="A";
+        patterns[2][row-1][col+1]="S";
         patterns[2][row+1][col+1]="M";
-        patterns[2][row-1][col-1]="A";
+        patterns[2][row-1][col-1]="S";
       }
-      if(pattern[row+1][col+1]==="M" && pattern[row-1][col-1]==="A" && pattern[row-1][col+1]==="M" && pattern[row+1][col-1]==="A") {
+      if(pattern[row+1][col+1]==="M" && pattern[row-1][col-1]==="S" && pattern[row-1][col+1]==="M" && pattern[row+1][col-1]==="S") {
         counts[3]++;
         patterns[3][row][col]="X";
         patterns[3][row+1][col+1]="M";
-        patterns[3][row-1][col-1]="A";
+        patterns[3][row-1][col-1]="S";
         patterns[3][row-1][col+1]="M";
-        patterns[3][row+1][col-1]="A";
+        patterns[3][row+1][col-1]="S";
       }
-      if(pattern[row-1][col+1]==="M" && pattern[row+1][col-1]==="A" && pattern[row-1][col-1]==="M" && pattern[row+1][col+1]==="A") {
+      if(pattern[row-1][col+1]==="M" && pattern[row+1][col-1]==="S" && pattern[row-1][col-1]==="M" && pattern[row+1][col+1]==="S") {
         counts[4]++;
         patterns[4][row][col]="X";
         patterns[4][row-1][col+1]="M";
-        patterns[4][row+1][col-1]="A";
+        patterns[4][row+1][col-1]="S";
         patterns[4][row-1][col-1]="M";
-        patterns[4][row+1][col+1]="A";
+        patterns[4][row+1][col+1]="S";
       }
     }
   }
