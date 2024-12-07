@@ -152,35 +152,85 @@ count_5=0;
 count_6=0;
 count_7=0;
 count_8=0;
-for(let row = 3;row<pattern.length-3;row++) {
-  for(let col = 3;col<pattern[row].length-3;col++) {
+pattern_1=[];
+pattern_2=[];
+pattern_3=[];
+pattern_4=[];
+pattern_5=[];
+pattern_6=[];
+pattern_7=[];
+pattern_8=[];
+for(let row=0;row<pattern.length;row++) {
+  pattern_1.push(" ".repeat(pattern[0].length).split(""));
+  pattern_2.push(" ".repeat(pattern[0].length).split(""));
+  pattern_3.push(" ".repeat(pattern[0].length).split(""));
+  pattern_4.push(" ".repeat(pattern[0].length).split(""));
+  pattern_5.push(" ".repeat(pattern[0].length).split(""));
+  pattern_6.push(" ".repeat(pattern[0].length).split(""));
+  pattern_7.push(" ".repeat(pattern[0].length).split(""));
+  pattern_8.push(" ".repeat(pattern[0].length).split(""));
+}
+for(let row = 3;row<pattern.length;row++) {
+  for(let col = 3;col<pattern[row].length;col++) {
     if(pattern[row][col]==='X') {
       /*if((row===3 && col===8) || (row===7 && col===3) || (row===12 && col===8)) {
         debugger;
       }*/
       if(pattern[row][col+1] + pattern[row][col+2] + pattern[row][col+3] === "MAS") {
         count_1++;
+        pattern_1[row][col]="X";
+        pattern_1[row][col+1]="M";
+        pattern_1[row][col+2]="A";
+        pattern_1[row][col+3]="S";
       }
       if(pattern[row+1][col+1] + pattern[row+2][col+2] + pattern[row+3][col+3] === "MAS") {
         count_2++;
+        pattern_2[row][col]="X";
+        pattern_2[row+1][col+1]="M";
+        pattern_2[row+2][col+2]="A";
+        pattern_2[row+3][col+3]="S";
       }
       if(pattern[row+1][col] + pattern[row+2][col] + pattern[row+3][col] === "MAS") {
         count_3++;
+        pattern_3[row][col]="X";
+        pattern_3[row+1][col]="M";
+        pattern_3[row+2][col]="A";
+        pattern_3[row+3][col]="S";
       }
       if(pattern[row+1][col-1] + pattern[row+2][col-2] + pattern[row+3][col-3] === "MAS") {
         count_4++;
+        pattern_4[row][col]="X";
+        pattern_4[row+1][col-1]="M";
+        pattern_4[row+2][col-2]="A";
+        pattern_4[row+3][col-3]="S";
       }
       if(pattern[row][col-1] + pattern[row][col-2] + pattern[row][col-3] === "MAS") {
         count_5++;
+        pattern_5[row][col]="X";
+        pattern_5[row][col-1]="M";
+        pattern_5[row][col-2]="A";
+        pattern_5[row][col-3]="S";
       }
       if(pattern[row-1][col-1] + pattern[row-2][col-2] + pattern[row-3][col-3] === "MAS") {
         count_6++;
+        pattern_6[row][col]="X";
+        pattern_6[row-1][col-1]="M";
+        pattern_6[row-1][col-2]="A";
+        pattern_6[row-1][col-3]="S";
       }
       if(pattern[row-1][col] + pattern[row-2][col] + pattern[row-3][col] === "MAS") {
         count_7++;
+        pattern_7[row][col]="X";
+        pattern_7[row-1][col]="M";
+        pattern_7[row-1][col]="A";
+        pattern_7[row-1][col]="S";
       }
       if(pattern[row-1][col-1] + pattern[row-2][col-2] + pattern[row-3][col-3] === "MAS") {
         count_8++;
+        pattern_8[row][col]="X";
+        pattern_8[row-1][col-1]="M";
+        pattern_8[row-1][col-2]="A";
+        pattern_8[row-1][col-3]="S";
       }
     }
   }
