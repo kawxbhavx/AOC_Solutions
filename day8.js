@@ -161,17 +161,22 @@ frequencies.forEach(function(frequency) {
           let otherAntennaPosition = frequencyFilteredPositions[frequency][otherAntenna];
           frequencyFilteredCombinations[frequency].push([currentAntennaPosition,otherAntennaPosition]);
           let antinodePosition = [(2*currentAntennaPosition[0])-otherAntennaPosition[0],(2*currentAntennaPosition[1])-otherAntennaPosition[1]];
-          frequencyFilteredAntinodePositions[frequency].push(antinodePosition);
+          //frequencyFilteredAntinodePositions[frequency].push(antinodePosition);
           //debugger;          
           //while(antinodePosition[0]>=0 || antinodePosition[0]<rows || antinodePosition[1]>=0 || antinodePosition[1]<cols) {
           //while(!(antinodePosition[0]<0 || antinodePosition[0]>=rows || antinodePosition[1]<0 || antinodePosition[1]>=cols)) {
           while(antinodePosition[0]>=0 && antinodePosition[0]<rows && antinodePosition[1]>=0 && antinodePosition[1]<cols) {
+            frequencyFilteredAntinodePositions[frequency].push(antinodePosition);
+            frequencyPattern[antinodePosition[0]][antinodePosition[1]]="#";
             otherAntennaPosition = currentAntennaPosition;
             currentAntennaPosition = antinodePosition;
+            //frequencyFilteredPositions[frequency].push(currentAntennaPosition);
             antinodePosition = [(2*currentAntennaPosition[0])-otherAntennaPosition[0],(2*currentAntennaPosition[1])-otherAntennaPosition[1]];
-            frequencyFilteredAntinodePositions[frequency].push(antinodePosition);
+            //frequencyFilteredAntinodePositions[frequency].push(antinodePosition);
           }        
-        }
+        } else {
+          frequencyFilteredAntinodePositions[frequency].push(frequencyFilteredPositions[frequency][currentAntenna]);
+        }        
       }
     } 
     
@@ -194,20 +199,21 @@ for(let frequency in frequencyFilteredAntinodePositions) {
   });
 }
 
-let validAntinodePositions = [];
+/*let validAntinodePositions = [];
 antinodePositions.forEach(function(antinodePosition) {
   if(!(antinodePosition[0]<0 || antinodePosition[0]>=rows || antinodePosition[1]<0 || antinodePosition[1]>=cols)) {
     validAntinodePositions.push(antinodePosition);
   }
 });
-//validAntinodePositions.length;
+//validAntinodePositions.length;*/
 
 for(let row=0;row<rows;row++) {
   for(let col=0;col<cols;col++) {    
     pattern[row][col]=".";    
   }
 }
-validAntinodePositions.forEach(function(antinodePosition) {
+//validAntinodePositions.forEach(function(antinodePosition) {
+antinodePositions.forEach(function(antinodePosition) {
   pattern[antinodePosition[0]][antinodePosition[1]]="#"
 });
 
