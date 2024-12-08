@@ -130,9 +130,9 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
   
   while(row>=0 && row<patternCopy.length && col>=0 && col<patternCopy[0].length) {
     //if(obstructionRow===0 && obstructionCol===0 && row===8 && col===7) {
-    if(obstructionRow===6 && obstructionCol===3) {
-      debugger;
-    }
+    //if(obstructionRow===6 && obstructionCol===3) {
+      //debugger;
+    //}
     try {
       if(direction==="up") {
         if(patternCopy[row-1][col]==="+") {
@@ -181,18 +181,18 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
   return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
 }
 
-getExitStatus(patternField,6,3,startRow,startCol);
+//getExitStatus(patternField,6,3,startRow,startCol);
 
-// let results = [];
-// for(let row=0;row<patternField.length;row++) {
-//   for(col=0;col<patternField[row].length;col++) {
-//     let result=getExitStatus(patternField,row,col,startRow,startCol);
-//     if(result!=null) {
-//       console.log(row + "," + col + "," + startRow + "," + startCol);
-//       if(result.status==="looped") {
-//         results.push(result);
-//       }
-//     }
-//   }
-// }
+let results = [];
+for(let row=0;row<patternField.length;row++) {
+  for(col=0;col<patternField[row].length;col++) {
+    let result=getExitStatus(patternField,row,col,startRow,startCol);
+    if(result!=null) {
+      console.log(row + "," + col + "," + startRow + "," + startCol);
+      if(result.status==="looped") {
+        results.push(result);
+      }
+    }
+  }
+}
 
