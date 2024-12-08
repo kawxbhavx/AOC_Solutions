@@ -34,11 +34,11 @@ updatesStr.forEach(function(update) {
 
 let validUpdates=[];
 updates.forEach(function(updateList) {
-  debugger;
+  //debugger;
   let ruleViolated=false;
   for(let currentUpdateIndex=0;currentUpdateIndex<updateList.length-1;currentUpdateIndex++) {    
     let currentUpdate=updateList[currentUpdateIndex];
-    for(let nextUpdateIndex=1;nextUpdateIndex<updateList.length;nextUpdateIndex++) {
+    for(let nextUpdateIndex=currentUpdateIndex+1;nextUpdateIndex<updateList.length;nextUpdateIndex++) {
       let nextUpdate=updateList[nextUpdateIndex];
       for(let ruleIndex=0;ruleIndex<rules.length;ruleIndex++) {
         let dependency=rules[ruleIndex][0];
@@ -62,6 +62,11 @@ updates.forEach(function(updateList) {
     validUpdates.push(updateList);
   }
 });
+let sum=0;
+validUpdates.forEach(function(updateList) {
+  sum = sum + updateList[parseInt(updateList.length/2)];
+});
+                     
 
 
 
