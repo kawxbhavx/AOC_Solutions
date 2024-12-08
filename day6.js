@@ -135,9 +135,9 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
     //if(obstructionRow===7 && obstructionCol===7) {
     //if(obstructionRow===8 && obstructionCol===1) {
     //if(obstructionRow===8 && obstructionCol===3) {
-    if(obstructionRow===9 && obstructionCol===7) {
-      debugger;
-    }
+    // if(obstructionRow===9 && obstructionCol===7) {
+    //   debugger;
+    // }
     //try {
       if(direction==="up") {
         if(patternCopy[row-1][col]==="+") {
@@ -186,13 +186,12 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
   return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
 }
 
-//getExitStatus(patternField,6,3,startRow,startCol);
-//getExitStatus(patternField,7,6,startRow,startCol);
-//getExitStatus(patternField,7,7,startRow,startCol);
-//getExitStatus(patternField,8,1,startRow,startCol);
-//getExitStatus(patternField,8,3,startRow,startCol);
-//getExitStatus(patternField,8,3,startRow,startCol);
-getExitStatus(patternField,9,7,startRow,startCol);
+//getExitStatus(patternField,6,3,startRow,startCol);//final=2,4
+//getExitStatus(patternField,7,6,startRow,startCol);//final=6,3
+//getExitStatus(patternField,7,7,startRow,startCol);//final=7,6 //causing error in after
+//getExitStatus(patternField,8,1,startRow,startCol);//final=5,2//tbf err 7,2
+//getExitStatus(patternField,8,3,startRow,startCol);//final=2,4
+//getExitStatus(patternField,9,7,startRow,startCol);//final=8,2//tbf 8,7
 
 let results = [];
 for(let row=0;row<patternField.length;row++) {
