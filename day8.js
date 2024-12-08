@@ -70,9 +70,9 @@ frequencies.forEach(function(frequency) {
 let antinodePositions = [];
 for(let frequency in frequencyFilteredAntinodePositions) {
   frequencyFilteredAntinodePositions[frequency].forEach(function(antinodePosition) {
-    if(!antinodePositions.includes(antinodePosition)) {
+    //if(!antinodePositions.includes(antinodePosition)) {
       antinodePositions.push(antinodePosition);
-    }
+    //}
   });
 }
 
@@ -82,4 +82,23 @@ antinodePositions.forEach(function(antinodePosition) {
     validAntinodePositions.push(antinodePosition);
   }
 });
-validAntinodePositions.length;
+//validAntinodePositions.length;
+
+for(let row=0;row<rows;row++) {
+  for(let col=0;col<cols;col++) {    
+    pattern[row][col]=".";    
+  }
+}
+validAntinodePositions.forEach(function(antinodePosition) {
+  pattern[antinodePosition[0]][antinodePosition[1]]="#"
+});
+
+let patternRows=[];
+pattern.forEach(function(patternRow) {
+  patternRows.push(patternRow.join(""));
+});
+let patternStr = patternRows.join("\n");
+let preNodeNew=preNode.cloneNode(true);
+preNodeNew.innerText=patternStr;
+preNode.before(preNodeNew);
+patternStr.match(/#/g).length;
