@@ -128,9 +128,7 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
 
   debugger;
   while(row>=0 && row<patternCopy.length && col>=0 && col<patternCopy[0].length) {
-    if(patternCopy[row][col]==="+") {
-      return {"status": "looped", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
-    } else if(direction==="up") {
+    if(direction==="up") {
       if(patternCopy[row-1][col]==="#") {
         direction="right";
         patternCopy[row][col] = "+";
@@ -161,8 +159,10 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
       } else {
         col--;
         patternCopy[row][col] = "-";      
-      }
-    }
+      } 
+    } else if(patternCopy[row][col]==="+") {
+      return {"status": "looped", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
+    } 
   }
   return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
 }
