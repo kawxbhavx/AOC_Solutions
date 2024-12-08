@@ -33,6 +33,7 @@ updatesStr.forEach(function(update) {
 });
 
 let validUpdates=[];
+let invalidUpdates=[];
 updates.forEach(function(updateList) {
   //debugger;
   let ruleViolated=false;
@@ -60,13 +61,24 @@ updates.forEach(function(updateList) {
   } 
   if(!ruleViolated) {
     validUpdates.push(updateList);
+  } else {
+    invalidUpdates.push(updateList);
   }
 });
-let sum=0;
+let validSum=0;
 validUpdates.forEach(function(updateList) {
-  sum = sum + updateList[parseInt(updateList.length/2)];
+  validSum = validSum + updateList[parseInt(updateList.length/2)];
 });
                      
+//part2
+invalidUpdates
+
+
+
+
+
+
+
 
 
 
@@ -82,3 +94,6 @@ for(let ruleIndex=0;ruleIndex<rules.length-1;ruleIndex++) {
     sortedRules.push(currentRule);
   }
 }
+
+
+let invalidSum=0;
