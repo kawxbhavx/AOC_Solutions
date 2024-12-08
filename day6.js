@@ -129,61 +129,52 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
   }
   
   while(row>=0 && row<patternCopy.length && col>=0 && col<patternCopy[0].length) {
-    if(obstructionRow===0 && obstructionCol===0 && row===8 && col===7) {
+    //if(obstructionRow===0 && obstructionCol===0 && row===8 && col===7) {
+    if(obstructionRow===6 && obstructionCol===3) {
       debugger;
     }
     try {
       if(direction==="up") {
-        if(patternCopy[row-1][col]==="#") {
-          direction="right";
+        if(patternCopy[row-1][col]==="+") {
+          return {"status": "looped", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
+        } else if(patternCopy[row-1][col]==="#") {
+          direction="right";          
           patternCopy[row][col] = "+";
-          //col++;
         } else {
           row--;
-          patternCopy[row][col] = "|";      
-          // if(row<0 || row>=rows || col<0 || col>=cols) {
-          //   return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
-          // }
+          patternCopy[row][col] = "|";
         }
       } else if(direction==="right") {
-        if(patternCopy[row][col+1]==="#") {
-          direction="down";
+        if(patternCopy[row][col+1]==="+") {
+          return {"status": "looped", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
+        } else if(patternCopy[row][col+1]==="#") {
+          direction="down";          
           patternCopy[row][col] = "+";
-          //row++;
         } else {
           col++;
-          patternCopy[row][col] = "-";   
-          // if(row<0 || row>=rows || col<0 || col>=cols) {
-          //   return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
-          // }
+          patternCopy[row][col] = "-";
         }
       } else if(direction==="down") {
-        if(patternCopy[row+1][col]==="#") {
-          direction="left";
+        if(patternCopy[row+1][col]==="+") {
+          return {"status": "looped", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
+        } else if(patternCopy[row+1][col]==="#") {
+          direction="left";          
           patternCopy[row][col] = "+";
-          //col--;
         } else {
           row++;      
           patternCopy[row][col] = "|";
-          // if(row<0 || row>=rows || col<0 || col>=cols) {
-          //   return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
-          // }
         }
       } else if(direction==="left") {
-        if(patternCopy[row][col-1]==="#") {
-          direction="up";
+        if(patternCopy[row][col-1]==="+") {
+          return {"status": "looped", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
+        } else if(patternCopy[row][col-1]==="#") {
+          direction="up";          
           patternCopy[row][col] = "+";
-          //row--;
         } else {
           col--;
-          patternCopy[row][col] = "-";  
-          // if(row<0 || row>=rows || col<0 || col>=cols) {
-          //   return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
-          // }
+          patternCopy[row][col] = "-"; 
         } 
-      } else if(patternCopy[row][col]==="+") {
-        return {"status": "looped", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
-      } 
+      }       
     } catch (err) {
     }    
   }
