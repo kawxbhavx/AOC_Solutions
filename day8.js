@@ -138,46 +138,49 @@ let frequencyFilteredPositions={};
 let frequencyFilteredCombinations={};
 let frequencyFilteredAntinodePositions={};
 frequencies.forEach(function(frequency) {
-  frequencyFilteredPositions[frequency]=[];
-  frequencyFilteredCombinations[frequency]=[];
-  frequencyFilteredAntinodePositions[frequency]=[];
-  let frequencyPattern = generatePattern(fieldRows);
-  let positions = [];
-  for(let row=0;row<rows;row++) {
-    for(let col=0;col<cols;col++) {
-      if(frequencyPattern[row][col]!=frequency) {
-        frequencyPattern[row][col]=".";
-      } else {
-        frequencyFilteredPositions[frequency].push([row,col]);
+  //if(frequency==='Z') {
+    frequencyFilteredPositions[frequency]=[];
+    frequencyFilteredCombinations[frequency]=[];
+    frequencyFilteredAntinodePositions[frequency]=[];
+    let frequencyPattern = generatePattern(fieldRows);
+    let positions = [];
+    for(let row=0;row<rows;row++) {
+      for(let col=0;col<cols;col++) {
+        if(frequencyPattern[row][col]!=frequency) {
+          frequencyPattern[row][col]=".";
+        } else {
+          frequencyFilteredPositions[frequency].push([row,col]);
+        }
       }
     }
-  }
-  frequencyFilteredPatterns[frequency]=frequencyPattern;
-  for(let currentAntenna=0;currentAntenna<frequencyFilteredPositions[frequency].length;currentAntenna++) {
-    for(let otherAntenna=0;otherAntenna<frequencyFilteredPositions[frequency].length;otherAntenna++) {
-      if(currentAntenna!=otherAntenna) {
-        let currentAntennaPosition = frequencyFilteredPositions[frequency][currentAntenna];
-        let otherAntennaPosition = frequencyFilteredPositions[frequency][otherAntenna];
-        frequencyFilteredCombinations[frequency].push([currentAntennaPosition,otherAntennaPosition]);
-        let nextAntinodePosition = [(2*currentAntennaPosition[0])-otherAntennaPosition[0],(2*currentAntennaPosition[1])-otherAntennaPosition[1]];
-        frequencyFilteredAntinodePositions[frequency].push(nextAntinodePosition);
-        while(nextAntinodePosition[0]>=0 || nextAntinodePosition[0]<rows || nextAntinodePosition[1]>=0 || nextAntinodePosition[1]<cols) {
-          currentAntennaPosition = otherAntennaPosition;
-          otherAntennaPosition = nextAntinodePosition;
-          nextAntinodePosition = [(2*currentAntennaPosition[0])-otherAntennaPosition[0],(2*currentAntennaPosition[1])-otherAntennaPosition[1]];
-          frequencyFilteredAntinodePositions[frequency].push(nextAntinodePosition);
-        }        
+    frequencyFilteredPatterns[frequency]=frequencyPattern;
+    for(let currentAntenna=0;currentAntenna<frequencyFilteredPositions[frequency].length;currentAntenna++) {
+      for(let otherAntenna=0;otherAntenna<frequencyFilteredPositions[frequency].length;otherAntenna++) {
+        if(currentAntenna!=otherAntenna) {
+          let currentAntennaPosition = frequencyFilteredPositions[frequency][currentAntenna];
+          let otherAntennaPosition = frequencyFilteredPositions[frequency][otherAntenna];
+          frequencyFilteredCombinations[frequency].push([currentAntennaPosition,otherAntennaPosition]);
+          let antinodePosition = [(2*currentAntennaPosition[0])-otherAntennaPosition[0],(2*currentAntennaPosition[1])-otherAntennaPosition[1]];
+          frequencyFilteredAntinodePositions[frequency].push(antinodePosition);
+          //debugger;          
+          while(antinodePosition[0]>=0 || antinodePosition[0]<rows || antinodePosition[1]>=0 || antinodePosition[1]<cols) {
+            otherAntennaPosition = currentAntennaPosition;
+            currentAntennaPosition = antinodePosition;
+            antinodePosition = [(2*currentAntennaPosition[0])-otherAntennaPosition[0],(2*currentAntennaPosition[1])-otherAntennaPosition[1]];
+            frequencyFilteredAntinodePositions[frequency].push(antinodePosition);
+          }        
+        }
       }
-    }
-  } 
-  
-  let patternRows=[];
-  frequencyPattern.forEach(function(patternRow) {
-    patternRows.push(patternRow.join(""));
-  });
-  let preNodeNew=preNode.cloneNode(true);
-  preNodeNew.innerText=patternRows.join("\n");
-  document.querySelector('body').appendChild(preNodeNew);
+    } 
+    
+    let patternRows=[];
+    frequencyPattern.forEach(function(patternRow) {
+      patternRows.push(patternRow.join(""));
+    });
+    let preNodeNew=preNode.cloneNode(true);
+    preNodeNew.innerText=patternRows.join("\n");
+    document.querySelector('body').appendChild(preNodeNew);
+  //}
 });
 
 let antinodePositions = [];
