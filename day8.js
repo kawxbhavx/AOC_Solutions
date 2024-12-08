@@ -164,7 +164,8 @@ frequencies.forEach(function(frequency) {
           frequencyFilteredAntinodePositions[frequency].push(antinodePosition);
           //debugger;          
           //while(antinodePosition[0]>=0 || antinodePosition[0]<rows || antinodePosition[1]>=0 || antinodePosition[1]<cols) {
-          while(!(antinodePosition[0]<0 || antinodePosition[0]>=rows || antinodePosition[1]<0 || antinodePosition[1]>=cols)) {
+          //while(!(antinodePosition[0]<0 || antinodePosition[0]>=rows || antinodePosition[1]<0 || antinodePosition[1]>=cols)) {
+          while(antinodePosition[0]>=0 && antinodePosition[0]<rows && antinodePosition[1]>=0 && antinodePosition[1]<cols) {
             otherAntennaPosition = currentAntennaPosition;
             currentAntennaPosition = antinodePosition;
             antinodePosition = [(2*currentAntennaPosition[0])-otherAntennaPosition[0],(2*currentAntennaPosition[1])-otherAntennaPosition[1]];
