@@ -19,13 +19,17 @@ equations.forEach(function(equation) {
     maxOperands=operandsList.length;
   }
 });
-let maxOperators=maxOperands-1;
-let operators=["+","*"];
-let operatorsCombinations=[...operators];
-for(let max=4;max>0;max++) {  
-  for(let i=0;i<operators.length;i++) {
-    for(let j=0;j<operatorsCombinations.length;j++) {
-      operatorsCombinations.push(operators[i] + operatorsCombinations[j]);
-    }
-  }
+
+let operators={1:["+","*"]};
+for(let ol=2; ol<maxOperands; ol++){
+    let oper=[];
+    operators[ol-1].forEach(function(comb1){
+        operators[1].forEach(function(comb2){
+            oper.push(comb1+comb2);
+        });
+    });
+    operators[ol]=oper;
 }
+
+
+console.log(operators);
