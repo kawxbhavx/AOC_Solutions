@@ -27,7 +27,7 @@ for(let ol=2; ol<maxOperands; ol++){
     operators[ol-1].forEach(function(comb1){
         operators[1].forEach(function(comb2){
             //oper.push(comb1+comb2);
-            oper.push([comb1,comb2]);
+            oper.push([...comb1,comb2]);
         });
     });
     operators[ol]=oper;
@@ -81,31 +81,18 @@ equations.forEach(function(equation) {
   }
 });
 
-let operators1={1:["+","*"]};
+let operators={1:["+","*","|"]};
 for(let ol=2; ol<maxOperands; ol++){
     let oper=[];
-    operators1[ol-1].forEach(function(comb1){
-        operators1[1].forEach(function(comb2){
-            oper.push([comb1,comb2]);
+    operators[ol-1].forEach(function(comb1){
+        operators[1].forEach(function(comb2){
+            oper.push([...comb1,comb2]);
         });
     });
-    operators1[ol]=oper;
-}
-
-let operators2={1:[" ","||"]};
-for(let ol=2; ol<maxOperands; ol++){
-    let oper=[];
-    operators2[ol-1].forEach(function(comb1){
-        operators2[1].forEach(function(comb2){
-            oper.push([comb1,comb2]);
-        });
-    });
-    operators2[ol]=oper;
+    operators[ol]=oper;
 }
 
 let sumTestValues=0;
-let missedValues=[];
-let missedOperands=[];
 operands.forEach(function(operandsList, operandsListIndex) {
   let operations = operators[operandsList.length-1];
   let resultList = [];
@@ -117,15 +104,14 @@ operands.forEach(function(operandsList, operandsListIndex) {
         result = result + operandsList[operatorIndex+1];
       } else if(operationsCombination[operatorIndex]==="*") {
         result = result * operandsList[operatorIndex+1];
+      } else if(operationsCombination[operatorIndex]==="|") {
+        result = parseInt(result.toString() + operandsList[operatorIndex+1].toString());
       }
     }
     resultList.push(result);
   });  
   if(resultList.includes(testValues[operandsListIndex])) {
     sumTestValues = sumTestValues + testValues[operandsListIndex];
-  } else {
-    missedValues.push(testValues[operandsListIndex]);
-    missedOperands.push(operandsList);
   }
 });
 sumTestValues;
