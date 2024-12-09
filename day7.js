@@ -1,6 +1,6 @@
 //part1
-equationsInput = "190: 10 19\n3267: 81 40 27\n83: 17 5\n156: 15 6\n7290: 6 8 6 15\n161011: 16 10 13\n192: 17 8 14\n21037: 9 7 18 13\n292: 11 6 16 20\n";
-//equationsInput = document.querySelector('pre').innerText;
+//equationsInput = "190: 10 19\n3267: 81 40 27\n83: 17 5\n156: 15 6\n7290: 6 8 6 15\n161011: 16 10 13\n192: 17 8 14\n21037: 9 7 18 13\n292: 11 6 16 20\n";
+equationsInput = document.querySelector('pre').innerText;
 equations = equationsInput.split("\n");
 equations.pop();
 let testValues=[];
@@ -38,11 +38,11 @@ operands.forEach(function(operandsList, operandsListIndex) {
   let resultList = [];
   operations.forEach(function(operationsCombination) {
     let result = operandsList[0];
-    for(let operatorIndex=0; operatorIndex<operations.length-1; operatorIndex++) {
-      debugger;
-      if(operations[operatorIndex]==="+") {
+    for(let operatorIndex=0; operatorIndex<operationsCombination.length; operatorIndex++) {
+      //debugger;
+      if(operationsCombination[operatorIndex]==="+") {
         result = result + operandsList[operatorIndex+1];
-      } else if(operations[operatorIndex]==="*") {
+      } else if(operationsCombination[operatorIndex]==="*") {
         result = result * operandsList[operatorIndex+1];
       }
     }
