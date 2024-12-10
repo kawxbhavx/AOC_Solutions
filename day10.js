@@ -23,20 +23,21 @@ rows=pattern.length;
 cols=pattern[0].length;
 function generateBlankPattern() {
   let patternCopy=[];
-  for(let row=0;row<rows.length;row++) {
+  for(let row=0;row<rows;row++) {
     patternCopy.push(".".repeat(cols).split(""));
   }
+  return patternCopy;
 }
 
 let trails={};
+let trailHeadNumber=0;
 for(let row=0;row<rows;row++) {
   for(let col=0;col<cols;col++) {
     if(pattern[row][col]===0) {
       let patternCopy=generateBlankPattern();
       patternCopy[row][col]=0;
-      trails[row + "," + col] = patternCopy;
-    } else {
-      trails[row + "," + col] = null;
+      trails[trailHeadNumber] = {"trailPathPattern":patternCopy, "pathPositions":{"pathNum":1,"path":[[row,col]]}};
+      trailHeadNumber++;
     }
   }
 }
