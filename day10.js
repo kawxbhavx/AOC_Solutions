@@ -1,6 +1,5 @@
 //part1
 let preNode=document.querySelector('pre');
-// preNode.innerText = fieldInput;
 //fieldInput = preNode.innerText;
 fieldInput = "89010123\n78121874\n87430965\n96549874\n45678903\n32019012\n01329801\n10456732\n";
 preNode.innerText = fieldInput;
@@ -36,8 +35,18 @@ for(let row=0;row<rows;row++) {
     if(pattern[row][col]===0) {
       let patternCopy=generateBlankPattern();
       patternCopy[row][col]=0;
-      trails[trailHeadNumber] = {"trailPathPattern":patternCopy, "pathPositions":{"pathNum":1,"path":[[row,col]]}};
+      trails[trailHeadNumber] = {"trailPathPattern":patternCopy, "pathPositions":[{"pathNum":1,"path":[[row,col]]}]};
       trailHeadNumber++;
+    }
+  }
+}
+
+for(let currentHeight=0;currentHeight<=8;currentHeight++) {
+  for(let trailHeadNumber in trails) {
+    for(let row=0;row<rows;row++) {
+      for(let col=0;col<cols;col++) {
+        
+      }
     }
   }
 }
