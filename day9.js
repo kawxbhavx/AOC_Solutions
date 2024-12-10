@@ -43,3 +43,26 @@ for(let index=0;index<fileBlocks.length;index++) {
 
 
 //part2
+input = document.querySelector('pre').innerText;
+pattern = input.split("\n");
+pattern.pop();
+pattern = pattern[0];
+let fileBlocks=[]; 
+let fileIndex=0;
+for(let index=0;index<pattern.length;index++) {
+  let mapDigit = parseInt(pattern.substring(index,index+1));  
+  //debugger;
+  if(index%2===0) {
+    let fileIndexStr=fileIndex + ";";
+    fileIndexStr=fileIndexStr.repeat(mapDigit).split(";");
+    fileIndexStr.pop();
+    for(let i=0;i<fileIndexStr.length;i++) {
+      fileIndexStr[i] = parseInt(fileIndexStr[i]);
+    }
+    fileBlocks.push(fileIndexStr);
+    fileIndex++;
+  } else {
+    fileBlocks.push(".".toString().repeat(mapDigit).split(""));
+  }
+}
+//let fileBlocks="00...111...2...333.44.5555.6666.777.888899".split("");
