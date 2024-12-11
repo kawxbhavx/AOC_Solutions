@@ -35,7 +35,7 @@ for(let row=0;row<rows;row++) {
     if(pattern[row][col]===0) {
       let patternCopy=generateBlankPattern();
       patternCopy[row][col]=0;
-      trails[trailHeadNumber] = {"trailPathPattern":patternCopy, "pathPositions":[{"pathPositionDir":[0],"positionCoordinate":[row,col]}]};
+      trails[trailHeadNumber] = {"trailPathPattern":patternCopy, "pathPositions":[{"pathPositionDir":[0],"positionCoordinates":[[row,col]]}]};
       trailHeadNumber++;
     }
   }
@@ -44,32 +44,33 @@ for(let row=0;row<rows;row++) {
 for(let currentHeight=0;currentHeight<=8;currentHeight++) {
   for(let trailHeadNumber in trails) {
     trails[trailHeadNumber].pathPositions.forEach(function(pathPosition) {
-      let positionRow=pathPosition.positionCoordinate[0];
-      let positionCol=pathPosition.positionCoordinate[1];
+      let previousPositions=pathPosition.positionCoordinates;
+      let positionRow=previousPositions[previousPositions.length-1][0];
+      let positionCol=previousPositions[previousPositions.length-1][1];
       if(currentHeight===pattern[positionRow][positionCol]) {
         let currentPositionDir=pathPosition.pathPositionDir[pathPosition.pathPositionDir.length-1];
         if(positionRow>=1) {
           if(pattern[positionRow-1][positionCol]===(currentHeight+1)) {
             trails[trailHeadNumber][positionRow-1][positionCol]=currentHeight+1;
-            trails[trailHeadNumber].pathPositions.push({"pathPositionDir":[currentPositionDir,1],"positionCoordinate":[positionRow-1,positionCol]});
-          }
-        }
-        if(positionCol>=1) {
-          if(pattern[positionRow][positionCol-1]===(currentHeight+1)) {
-            trails[trailHeadNumber][positionRow][positionCol-1]=currentHeight+1;
-            trails[trailHeadNumber].pathPositions.push({"pathPositionDir":[currentPositionDir,2],"positionCoordinate":[positionRow,positionCol-1]});
+            trails[trailHeadNumber].pathPositions.push({"pathPositionDir":[...pathPosition.pathPositionDir,1],"positionCoordinates":[previousPositions,[positionRow-1,positionCol]]});
           }
         }
         if(positionRow<=rows-2) {
           if(pattern[positionRow+1][positionCol]===(currentHeight+1)) {
             trails[trailHeadNumber][positionRow+1][positionCol]=currentHeight+1;
-            trails[trailHeadNumber].pathPositions.push({"pathPositionDir":[currentPositionDir,3],"positionCoordinate":[positionRow+1,positionCol]});
+            trails[trailHeadNumber].pathPositions.push({"pathPositionDir":[...pathPosition.pathPositionDir,2],"positionCoordinates":[previousPositions,[positionRow+1,positionCol]]});
           }
         }
+        if(positionCol>=1) {
+          if(pattern[positionRow][positionCol-1]===(currentHeight+1)) {
+            trails[trailHeadNumber][positionRow][positionCol-1]=currentHeight+1;
+            trails[trailHeadNumber].pathPositions.push({"pathPositionDir":[...pathPosition.pathPositionDir,3],"positionCoordinates":[previousPositions,[positionRow,positionCol-1]]});
+          }
+        }        
         if(positionCol<=cols-2) {
           if(pattern[positionRow][positionCol+1]===(currentHeight+1)) {
             trails[trailHeadNumber][positionRow][positionCol+1]=currentHeight+1;
-            trails[trailHeadNumber].pathPositions.push({"pathPositionDir":[currentPositionDir,4],"positionCoordinate":[positionRow,positionCol+1]});
+            trails[trailHeadNumber].pathPositions.push({"pathPositionDir":[...pathPosition.pathPositionDir,4],"positionCoordinates":[previousPositions,[positionRow,positionCol+1]]});
           }
         }
       }
