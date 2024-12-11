@@ -51,25 +51,25 @@ for(let currentHeight=0;currentHeight<=8;currentHeight++) {
         let currentPositionDir=pathPosition.pathPositionDir[pathPosition.pathPositionDir.length-1];
         if(positionRow>=1) {
           if(pattern[positionRow-1][positionCol]===(currentHeight+1)) {
-            trails[trailHeadNumber][positionRow-1][positionCol]=currentHeight+1;
+            trails[trailHeadNumber].trailPathPattern[positionRow-1][positionCol]=currentHeight+1;
             trails[trailHeadNumber].pathPositions.push({"pathPositionDir":[...pathPosition.pathPositionDir,1],"positionCoordinates":[previousPositions,[positionRow-1,positionCol]]});
           }
         }
         if(positionRow<=rows-2) {
           if(pattern[positionRow+1][positionCol]===(currentHeight+1)) {
-            trails[trailHeadNumber][positionRow+1][positionCol]=currentHeight+1;
+            trails[trailHeadNumber].trailPathPattern[positionRow+1][positionCol]=currentHeight+1;
             trails[trailHeadNumber].pathPositions.push({"pathPositionDir":[...pathPosition.pathPositionDir,2],"positionCoordinates":[previousPositions,[positionRow+1,positionCol]]});
           }
         }
         if(positionCol>=1) {
           if(pattern[positionRow][positionCol-1]===(currentHeight+1)) {
-            trails[trailHeadNumber][positionRow][positionCol-1]=currentHeight+1;
+            trails[trailHeadNumber].trailPathPattern[positionRow][positionCol-1]=currentHeight+1;
             trails[trailHeadNumber].pathPositions.push({"pathPositionDir":[...pathPosition.pathPositionDir,3],"positionCoordinates":[previousPositions,[positionRow,positionCol-1]]});
           }
         }        
         if(positionCol<=cols-2) {
           if(pattern[positionRow][positionCol+1]===(currentHeight+1)) {
-            trails[trailHeadNumber][positionRow][positionCol+1]=currentHeight+1;
+            trails[trailHeadNumber].trailPathPattern[positionRow][positionCol+1]=currentHeight+1;
             trails[trailHeadNumber].pathPositions.push({"pathPositionDir":[...pathPosition.pathPositionDir,4],"positionCoordinates":[previousPositions,[positionRow,positionCol+1]]});
           }
         }
