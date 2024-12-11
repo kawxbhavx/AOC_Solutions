@@ -1,7 +1,7 @@
 //part1
 //let inputStones="0 1 10 99 999";
-//let inputStones="125 17";
-let inputStones="8069 87014 98 809367 525 0 9494914 5";
+let inputStones="125 17";
+//let inputStones="8069 87014 98 809367 525 0 9494914 5";
 
 let stones=inputStones.split(" ");
 for(let i=0;i<stones.length;i++) {
@@ -9,7 +9,7 @@ for(let i=0;i<stones.length;i++) {
 }
 
 for(let blink=1;blink<=25;blink++) {
-  debugger;
+  //debugger;
   for(let i=0;i<stones.length;i++) {
     if(stones[i]===0) {    
       stones[i]=1;
@@ -27,6 +27,7 @@ for(let blink=1;blink<=25;blink++) {
 stones.length;
 
 //part2
+//let inputStones="125 17";
 let inputStones="8069 87014 98 809367 525 0 9494914 5";
 
 let stones=inputStones.split(" ");
@@ -53,19 +54,18 @@ for(let blink=1;blink<=75;blink++) {
       stones[i] = stones[i]*2024;
     }    
   }
-
+  //debugger;
   for(let i=0;i<stones.length-1;i++) {
     for(let j=i+1;j<stones.length;j++) {
       if(stones[i]===stones[j]) {
         stones.splice(j,1);
-        frequencies[i]=frequencies[i]*2;
+        frequencies[i]=frequencies[i]+frequencies[j];
         frequencies.splice(j,1);
         j--;
-      } else {
-        break;
       }
     }
   }
+  //debugger;
 }
 
 let count=0;
