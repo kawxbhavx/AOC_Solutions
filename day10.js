@@ -1,8 +1,8 @@
 //part1
 let preNode=document.querySelector('pre');
-//fieldInput = preNode.innerText;
-fieldInput = "89010123\n78121874\n87430965\n96549874\n45678903\n32019012\n01329801\n10456732\n";
-preNode.innerText = fieldInput;
+fieldInput = preNode.innerText;
+//fieldInput = "89010123\n78121874\n87430965\n96549874\n45678903\n32019012\n01329801\n10456732\n";
+//preNode.innerText = fieldInput;
 fieldRows = fieldInput.split("\n");
 fieldRows.pop();
 function generatePattern(patternRows) {
@@ -77,3 +77,14 @@ for(let currentHeight=0;currentHeight<=8;currentHeight++) {
     });
   }
 }
+
+let score=0;
+for(let trailHeadNumber in trails) {
+  let trailPathPattern = trails[trailHeadNumber].trailPathPattern;
+  trailPathPattern.forEach(function(pathRow, index) {
+    trailPathPattern[index]=pathRow.join("");
+  });
+  trails[trailHeadNumber]=trailPathPattern.join("\n");
+  score = score + trails[trailHeadNumber].match(/9/g).length;
+}
+score;
