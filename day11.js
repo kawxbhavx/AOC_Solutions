@@ -9,7 +9,7 @@ for(let i=0;i<stones.length;i++) {
 }
 
 for(let blink=1;blink<=25;blink++) {
-  //debugger;
+  debugger;
   for(let i=0;i<stones.length;i++) {
     if(stones[i]===0) {    
       stones[i]=1;
