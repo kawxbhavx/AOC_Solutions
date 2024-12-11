@@ -37,7 +37,7 @@ for(let i=0;i<stones.length;i++) {
 }
 
 
-for(let blink=1;blink<=25;blink++) {
+for(let blink=1;blink<=75;blink++) {
   //debugger;
   for(let i=0;i<stones.length;i++) {
     if(stones[i]===0) {    
@@ -55,7 +55,7 @@ for(let blink=1;blink<=25;blink++) {
   }
 
   for(let i=0;i<stones.length-1;i++) {
-    for(let j=i;j<stones.length;j++) {
+    for(let j=i+1;j<stones.length;j++) {
       if(stones[i]===stones[j]) {
         stones.splice(j,1);
         frequencies[i]=frequencies[i]*2;
@@ -67,3 +67,9 @@ for(let blink=1;blink<=25;blink++) {
     }
   }
 }
+
+let count=0;
+for(let i=0;i<frequencies.length;i++) {
+  count = count + frequencies[i];
+}
+count;
