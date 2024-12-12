@@ -44,7 +44,7 @@ for(let index=0;index<fileBlocks.length;index++) {
 
 //part2
 input = document.querySelector('pre').innerText;
-input = "2333133121414131402\n";
+//input = "2333133121414131402\n";
 pattern = input.split("\n");
 pattern.pop();
 pattern = pattern[0];
@@ -84,13 +84,22 @@ for(fileId;fileId>0;fileId--) {
   let blockLen=fileBlocks[blockIndex].length;
   for(let spaceIndex=1;spaceIndex<fileBlocks.length;spaceIndex++) {
     if(fileBlocks[spaceIndex].includes(".")) {
-      if(fileBlocks[spaceIndex].length>=blockLen) {
+      if(fileBlocks[spaceIndex].length>=blockLen && spaceIndex<blockIndex) {
         fileBlocks.splice(spaceIndex,0,fileBlocks[blockIndex]);
         fileBlocks[spaceIndex+1].splice(0,blockLen);
         blockIndex++;
-        fileBlocks.splice(blockIndex,Infinity);        
+        fileBlocks.splice(blockIndex,1,'.'.repeat(blockLen).split(""));        
         break;
       }
     }
   }
+}
+fileBlocks=fileBlocks.flat(Infinity);
+let checksum=0;
+for(let index=0;index<fileBlocks.length;index++) {
+  if(fileBlocks[index]===".") {
+    break;
+  } else {
+    checksum = checksum + (index * fileBlocks[index]);
+  }  
 }
