@@ -85,16 +85,21 @@ let plantTypes={};
 let perimeters={};
 let rows=pattern.length;
 let cols=pattern[0].length;
-for(let row=0;row<rows;row++) {
-  for(let col=0;col<cols;col++) {
-    if(plantTypes.hasOwnProperty(pattern[row][col])) {
-      plantTypes[pattern[row][col]]=plantTypes[pattern[row][col]]+1;
-    } else {
-      plantTypes[pattern[row][col]]=1;
-    }    
-  }
-}
 
+let areas=[];
+for(let row=0;row<rows;row++) {
+  let col=0;
+  let area={"plantType":pattern[row][col],"startRow":row,"startCol":col};  
+  for(col=1;col<cols;col++) {
+    if(pattern[row][col]!=pattern[row][col-1]) {      
+      area["endCol"]=col-1;
+      areas.push(area);
+      area={"plantType":pattern[row][col],"startRow":row,"startCol":col};
+    }
+  }
+  area["endCol"]=col-1;
+  areas.push(area);
+}
 
 
 
