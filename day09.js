@@ -97,9 +97,8 @@ for(fileId;fileId>0;fileId--) {
 fileBlocks=fileBlocks.flat(Infinity);
 let checksum=0;
 for(let index=0;index<fileBlocks.length;index++) {
-  if(fileBlocks[index]===".") {
-    break;
-  } else {
+  if(!(fileBlocks[index]===".")) {    
     checksum = checksum + (index * fileBlocks[index]);
   }  
 }
+checksum;
