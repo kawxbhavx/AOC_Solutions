@@ -101,5 +101,28 @@ for(let row=0;row<rows;row++) {
   areas.push(area);
 }
 
+areas.forEach(function(area) {
+  let row=area.startRow+1;
+  for(row;row<rows;row++) {
+    if(pattern[row][area.endCol]!=pattern[row-1][area.endCol]) {
+      area["endRow"]=row-1;
+      break;
+    }
+  }
+  if(!area.hasOwnProperty("endRow")) {
+    area["endRow"]=row-1;
+  }
+});
+
+let areasByPlantType={};
+areas.forEach(function(area) {
+  if(!areasByPlantType.hasOwnProperty(area.plantType)) {
+    areasByPlantType[area.plantType]=[];
+  }
+  areasByPlantType[area.plantType].push(area);
+  delete area.plantType;
+});
+              
+
 
 
