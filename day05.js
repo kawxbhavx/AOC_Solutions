@@ -114,7 +114,7 @@ function generateSortedRules(elements) {
 
 let sortedUpdates=[];
 invalidUpdates.forEach(function(updateList) {
-  //debugger;
+  debugger;
   let sortedRules=generateSortedRules(updateList);
   let sortedUpdateList=[];
   sortedRules.forEach(function(rule) {
