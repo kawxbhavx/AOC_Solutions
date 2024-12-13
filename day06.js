@@ -85,7 +85,7 @@ pattern;
 
 
 
-//part2
+//part2  //1951
 patternInput = document.querySelector('pre').innerText;
 patternInput = "....#.....\n.........#\n..........\n..#.......\n.......#..\n..........\n.#..^.....\n........#.\n#.........\n......#...\n";
 patternRows = patternInput.split("\n");
