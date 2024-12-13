@@ -128,24 +128,51 @@ for(let plantType in areasByPlantType) {
   let areas=areasByPlantType[plantType];
   for(let i=0;i<areas.length;i++) {
     for(let j=0;j<areas.length;j++) {
-      if(i<areas.length) {
+      //if(i<areas.length) {
         if(i!=j) {
-          let merged=false; 
-          //debugger;        
-          if(areas[i].endCol===areas[j].startCol) {
-            areas[i].endRow=areas[j].endRow;
-            merged=true;
-          }         
-          if(areas[i].endRow===areas[j].startRow) {
-            areas[i].endCol=areas[j].endCol;
-            merged=true;
+          // let merged=false; 
+          // //debugger;        
+          // if(areas[i].endCol===areas[j].startCol) {
+          //   areas[i].endRow=areas[j].endRow;
+          //   merged=true;
+          // }         
+          // if(areas[i].endRow===areas[j].startRow) {
+          //   areas[i].endCol=areas[j].endCol;
+          //   merged=true;
+          // }
+          // if(merged) {
+          //   areas.splice(j,1);
+          //   j--;
+          // }
+
+          let area1=areas[i];
+          let area2=areas[j];
+          if(area2.startCol<=area1.endCol+1) {
+            if(!(area1.endRow<area2.startRow && area1.startRow>area2.endRow)) {
+              area1.startRow=Math.min(area1.startRow,area2.startRow);
+              area2.startRow=Math.min(area1.startRow,area2.startRow);
+              area1.endRow=Math.max(area1.endRow,area2.endRow);
+              area2.endRow=Math.max(area1.endRow,area2.endRow);
+              area1.startCol=Math.min(area1.startCol,area2.startCol);
+              area2.startCol=Math.min(area1.startCol,area2.startCol);
+              area1.endCol=Math.max(area1.endCol,area2.endCol);
+              area2.endCol=Math.max(area1.endCol,area2.endCol);
+            }
           }
-          if(merged) {
-            areas.splice(j,1);
-            j--;
+          if(area2.startRow<=area1.endRow+1) {
+            if(!(area1.endCol<area2.startCol && area1.startCol>area2.endCol)) {
+              area1.startRow=Math.min(area1.startRow,area2.startRow);
+              area2.startRow=Math.min(area1.startRow,area2.startRow);
+              area1.endRow=Math.max(area1.endRow,area2.endRow);
+              area2.endRow=Math.max(area1.endRow,area2.endRow);
+              area1.startCol=Math.min(area1.startCol,area2.startCol);
+              area2.startCol=Math.min(area1.startCol,area2.startCol);
+              area1.endCol=Math.max(area1.endCol,area2.endCol);
+              area2.endCol=Math.max(area1.endCol,area2.endCol);
+            }
           }
         }
-      }
+      //}
     }
   }
 }
