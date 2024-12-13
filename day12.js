@@ -131,9 +131,13 @@ for(let plantType in areasByPlantType) {
       if(i!=j) {
         let merged=false; 
         //debugger;
-        if(areas[i].endCol===areas[j].startCol) {
-          areas[i].endRow=areas[j].endRow;
-          merged=true;
+        try {
+          if(areas[i].endCol===areas[j].startCol) {
+            areas[i].endRow=areas[j].endRow;
+            merged=true;
+          } 
+        } catch(err) {
+          debugger;
         }
         if(areas[i].endRow===areas[j].startRow) {
           areas[i].endCol=areas[j].endCol;
@@ -141,6 +145,7 @@ for(let plantType in areasByPlantType) {
         }
         if(merged) {
           areas.splice(j,1);
+          i--;
           j--;
         }
       }
