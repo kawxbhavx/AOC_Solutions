@@ -128,25 +128,22 @@ for(let plantType in areasByPlantType) {
   let areas=areasByPlantType[plantType];
   for(let i=0;i<areas.length;i++) {
     for(let j=0;j<areas.length;j++) {
-      if(i!=j) {
-        let merged=false; 
-        //debugger;
-        try {
+      if(i<areas.length) {
+        if(i!=j) {
+          let merged=false; 
+          //debugger;        
           if(areas[i].endCol===areas[j].startCol) {
             areas[i].endRow=areas[j].endRow;
             merged=true;
-          } 
-        } catch(err) {
-          debugger;
-        }
-        if(areas[i].endRow===areas[j].startRow) {
-          areas[i].endCol=areas[j].endCol;
-          merged=true;
-        }
-        if(merged) {
-          areas.splice(j,1);
-          i--;
-          j--;
+          }         
+          if(areas[i].endRow===areas[j].startRow) {
+            areas[i].endCol=areas[j].endCol;
+            merged=true;
+          }
+          if(merged) {
+            areas.splice(j,1);
+            j--;
+          }
         }
       }
     }
