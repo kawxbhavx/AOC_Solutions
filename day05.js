@@ -75,7 +75,8 @@ function generateSortedRules(elements) {
   let applicableRules=[];
   elements.forEach(function(element) {
     rules.forEach(function(rule) {
-      if(rule.includes(element)) {
+      //if(rule.includes(element)) {
+      if(rule[0]===element) {
         applicableRules.push(rule);
       };
     });
@@ -114,7 +115,7 @@ function generateSortedRules(elements) {
 
 let sortedUpdates=[];
 invalidUpdates.forEach(function(updateList) {
-  debugger;
+  //debugger;
   let sortedRules=generateSortedRules(updateList);
   let sortedUpdateList=[];
   sortedRules.forEach(function(rule) {
