@@ -1,7 +1,7 @@
 //part1
-patternInput = "47|53\n97|13\n97|61\n97|47\n75|29\n61|13\n75|53\n29|13\n97|29\n53|29\n61|53\n97|53\n61|29\n47|13\n75|47\n97|75\n47|61\n75|61\n47|29\n75|13\n53|13\n\n" + 
+patternInput = document.querySelector('pre').innerText;
+//patternInput = "47|53\n97|13\n97|61\n97|47\n75|29\n61|13\n75|53\n29|13\n97|29\n53|29\n61|53\n97|53\n61|29\n47|13\n75|47\n97|75\n47|61\n75|61\n47|29\n75|13\n53|13\n\n" + 
   "75,47,61,53,29\n97,61,53,29,13\n75,29,13\n75,97,47,61,53\n61,13,29\n97,13,75,29,47\n";
-//patternInput = document.querySelector('pre').innerText;
 pattern = patternInput.split("\n");
 let rulesStr = [];
 let updatesStr = [];
@@ -114,6 +114,7 @@ function generateSortedRules(elements) {
 
 let sortedUpdates=[];
 invalidUpdates.forEach(function(updateList) {
+  //debugger;
   let sortedRules=generateSortedRules(updateList);
   let sortedUpdateList=[];
   sortedRules.forEach(function(rule) {
@@ -123,3 +124,8 @@ invalidUpdates.forEach(function(updateList) {
   });
   sortedUpdates.push(sortedUpdateList);
 });
+let invalidSum=0;
+sortedUpdates.forEach(function(updateList) {
+  invalidSum = invalidSum + updateList[parseInt(updateList.length/2)];
+});
+invalidSum;
