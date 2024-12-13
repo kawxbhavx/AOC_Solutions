@@ -99,6 +99,8 @@ for(let i=0;i<equationRows.length;i++) {
       B.X.push(x);
       B.Y.push(y);  
     } else if(equationRow.startsWith("Prize: ")) {
+      //P.X.push(x);
+      //P.Y.push(y);  
       P.X.push(x+10000000000000);
       P.Y.push(y+10000000000000);  
     }
@@ -119,9 +121,11 @@ for(let i=0;i<A.X.length;i++) {
     let det=(a*d)-(b*c);
     let aPush=((P.X[i]*d)-(P.Y[i]*b))/det;
     let bPush=((P.Y[i]*a)-(P.X[i]*c))/det;
-    aList.push(aPush);
-    bList.push(bPush);
-    tokens = tokens + (aPush*3) + bPush;
+    if(Number.isInteger(aPush) && Number.isInteger(bPush) && aPush>0 && bPush>0) {
+      aList.push(aPush);
+      bList.push(bPush);
+      tokens = tokens + (aPush*3) + bPush;
+    }
   }  
   aPushes.push(aList);
   bPushes.push(bList);
