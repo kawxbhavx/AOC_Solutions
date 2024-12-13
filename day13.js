@@ -40,3 +40,23 @@ for(let i=0;i<equationRows.length;i++) {
     }
   }  
 }
+
+tokens=0;
+let aPushes=[];
+let bPushes=[];
+for(let i=0;i<A.X.length;i++) {
+  let aList=[];
+  let bList=[];
+  for(let aPush=1;aPush<=100;aPush++) {
+    for(let bPush=1;bPush<=100;bPush++) {
+      if((((aPush*A.X[i]) + (bPush*B.X[i]))===P.X[i]) && (((aPush*A.Y[i]) + (bPush*B.Y[i]))===P.Y[i])) {
+        aList.push(aPush);
+        bList.push(bPush);
+        tokens = tokens + (aPush*3) + bPush;
+      }
+    }
+  }
+  aPushes.push(aList);
+  bPushes.push(bList);
+}
+tokens;
