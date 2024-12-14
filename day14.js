@@ -1,8 +1,7 @@
 //part1
 let preNode=document.querySelector('pre');
-//preNode.innerText = fieldInput;
-//let robotDetailsStr = preNode.innerText;
-let robotDetailsStr = "p=0,4 v=3,-3" + 
+let robotDetailsStr = preNode.innerText;
+//let robotDetailsStr = "p=0,4 v=3,-3" + 
 "\np=6,3 v=-1,-3" +
 "\np=10,3 v=-1,2" +
 "\np=2,0 v=2,-1" +
@@ -14,11 +13,11 @@ let robotDetailsStr = "p=0,4 v=3,-3" +
 "\np=7,3 v=-1,2" +
 "\np=2,4 v=2,-3" +
 "\np=9,5 v=-3,-3\n";
-let tileRows=7;
-let tileCols=11;
+//let tileRows=7;
+//let tileCols=11;
 
-//let tileRows=103;
-//let tileCols=101;
+let tileRows=103;
+let tileCols=101;
 
 let robots={};
 
@@ -69,8 +68,46 @@ for(let robotId in robots) {
   }  
 }
 
+let q1Count=0;
+for(let row=0;row<=((tileRows-1)/2)-1;row++) {
+  for(let col=0;col<=((tileCols-1)/2)-1;col++) {
+    if(robotPattern[row][col]!=".") {
+      q1Count++;
+    }
+  }
+}
+
+let q2Count=0;
+for(let row=0;row<=((tileRows-1)/2)-1;row++) {
+  for(let col=((tileCols-1)/2)+1;col<=tileCols-1;col++) {
+    if(robotPattern[row][col]!=".") {
+      q2Count++;
+    }
+  }
+}
+
+let q3Count=0;
+for(let row=((tileRows-1)/2)+1;row<=tileRows-1;row++) {
+  for(let col=0;col<=((tileCols-1)/2)-1;col++) {
+    if(robotPattern[row][col]!=".") {
+      q3Count++;
+    }
+  }
+}
+
+let q4Count=0;
+for(let row=((tileRows-1)/2)+1;row<=tileRows-1;row++) {
+  for(let col=((tileCols-1)/2)+1;col<=tileCols-1;col++) {
+    if(robotPattern[row][col]!=".") {
+      q4Count++;
+    }
+  }
+}
+
 let robotPatternStr="";
 robotPattern.forEach(function(patternRow) {
   robotPatternStr = robotPatternStr + patternRow.join("") + "\n";
 });
 preNode.innerText = robotPatternStr;
+
+q1Count*q2Count*q3Count*q4Count;
