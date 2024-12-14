@@ -363,7 +363,7 @@ function drawUpdatedPattern() {
       if(second!=secondsCounter) {
         clearInterval(cntr);
         secondsElement.innerText=minSecond;
-        preNode.innerText = products[minSecond];
+        preNode.innerText = patterns[minSecond];
       }
     }
   }
