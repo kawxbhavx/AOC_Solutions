@@ -1,8 +1,8 @@
 //part1
 let preNode=document.querySelector('pre');
 //preNode.innerText = fieldInput;
-let robotDetailsStr = preNode.innerText;
-//let robotDetailsStr = "p=0,4 v=3,-3" + 
+//let robotDetailsStr = preNode.innerText;
+let robotDetailsStr = "p=0,4 v=3,-3" + 
 "\np=6,3 v=-1,-3" +
 "\np=10,3 v=-1,2" +
 "\np=2,0 v=2,-1" +
@@ -13,12 +13,12 @@ let robotDetailsStr = preNode.innerText;
 "\np=9,3 v=2,3" +
 "\np=7,3 v=-1,2" +
 "\np=2,4 v=2,-3" +
-"\np=9,5 v=-3,-3";
-//let tileRows=7;
-//let tileCols=11;
+"\np=9,5 v=-3,-3\n";
+let tileRows=7;
+let tileCols=11;
 
-let tileRows=103;
-let tileCols=101;
+//let tileRows=103;
+//let tileCols=101;
 
 let robots={};
 
@@ -34,6 +34,25 @@ for(let robotId=0;robotId<robotDetailRows.length;robotId++) {
   let velocityX=parseInt(velocityStr.substring(2));
   let velocityY=parseInt(velocityStr.substring(velocityStr.indexOf(",")+1));
   robots[robotId] = {"position":{"x":positionX,"y":positionY},"velocity":{"x":velocityX,"y":velocityY}};
+}
+
+for(let seconds=1;seconds<=100;seconds++) {
+  for(let robotId in robots) {
+    let position=robots[robotId].position;
+    let velocity=robots[robotId].velocity;
+    position.x = position.x + velocity.x;
+    if(position.x<0) {
+      position.x=tileCols+position.x;
+    } else if(position.x>=tileCols) {
+      position.x=position.x-tileCols;
+    }
+    position.y = position.y + velocity.y;
+    if(position.y<0) {
+      position.y=tileRows+position.y;
+    } else if(position.y>=tileRows) {
+      position.y=position.y-tileRows;
+    }
+  }
 }
 
 let robotPattern=[];
@@ -52,5 +71,6 @@ for(let robotId in robots) {
 
 let robotPatternStr="";
 robotPattern.forEach(function(patternRow) {
-  
+  robotPatternStr = robotPatternStr + patternRow.join("") + "\n";
 });
+preNode.innerText = robotPatternStr;
