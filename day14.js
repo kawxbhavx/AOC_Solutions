@@ -20,3 +20,37 @@ let robotDetailsStr = preNode.innerText;
 let tileRows=103;
 let tileCols=101;
 
+let robots={};
+
+robotDetailRows = robotDetailsStr.split("\n");
+robotDetailRows.pop();
+
+for(let robotId=0;robotId<robotDetailRows.length;robotId++) {
+  let detailArr=robotDetailRows[robotId].split(" ");
+  let positionStr=detailArr[0];
+  let velocityStr=detailArr[1];
+  let positionX=parseInt(positionStr.substring(2));
+  let positionY=parseInt(positionStr.substring(positionStr.indexOf(",")+1));
+  let velocityX=parseInt(velocityStr.substring(2));
+  let velocityY=parseInt(velocityStr.substring(velocityStr.indexOf(",")+1));
+  robots[robotId] = {"position":{"x":positionX,"y":positionY},"velocity":{"x":velocityX,"y":velocityY}};
+}
+
+let robotPattern=[];
+for(let row=0;row<tileRows;row++) {
+  robotPattern.push(".".repeat(tileCols).split(""));
+}
+
+for(let robotId in robots) {
+  let position=robots[robotId].position;
+  if(robotPattern[position.y][position.x]===".") {
+    robotPattern[position.y][position.x]=1;
+  } else {
+    robotPattern[position.y][position.x]++;
+  }  
+}
+
+let robotPatternStr="";
+robotPattern.forEach(function(patternRow) {
+  
+});
