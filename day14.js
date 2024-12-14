@@ -265,6 +265,11 @@ let cntr=setInterval(function() {
 }, 1);
 
 patterns={};
+products={};
+let maxProduct=1;
+let minProduct=Infinity;
+let maxSecond=0;
+let minSecond=0;
 
 function drawUpdatedPattern() {
   for(let robotId in robots) {
@@ -298,6 +303,42 @@ function drawUpdatedPattern() {
     }  
   }
 
+  let q1Count=0;
+  for(let row=0;row<=((tileRows-1)/2)-1;row++) {
+    for(let col=0;col<=((tileCols-1)/2)-1;col++) {
+      if(robotPattern[row][col]!=".") {
+        q1Count=q1Count+robotPattern[row][col];
+      }
+    }
+  }
+  
+  let q2Count=0;
+  for(let row=0;row<=((tileRows-1)/2)-1;row++) {
+    for(let col=((tileCols-1)/2)+1;col<=tileCols-1;col++) {
+      if(robotPattern[row][col]!=".") {
+        q2Count=q2Count+robotPattern[row][col];
+      }
+    }
+  }
+  
+  let q3Count=0;
+  for(let row=((tileRows-1)/2)+1;row<=tileRows-1;row++) {
+    for(let col=0;col<=((tileCols-1)/2)-1;col++) {
+      if(robotPattern[row][col]!=".") {
+        q3Count=q3Count+robotPattern[row][col];
+      }
+    }
+  }
+  
+  let q4Count=0;
+  for(let row=((tileRows-1)/2)+1;row<=tileRows-1;row++) {
+    for(let col=((tileCols-1)/2)+1;col<=tileCols-1;col++) {
+      if(robotPattern[row][col]!=".") {
+        q4Count=q4Count+robotPattern[row][col];
+      }
+    }
+  }
+
   secondsCounter++;
   secondsElement.innerText=secondsCounter;
   let robotPatternStr="";
@@ -307,6 +348,15 @@ function drawUpdatedPattern() {
   preNode.innerText = robotPatternStr;
 
   patterns[secondsCounter]=robotPatternStr;
+  products[secondsCounter]=q1Count*q2Count*q3Count*q4Count;
+  if(products[secondsCounter]>maxProduct) {
+    maxProduct=products[secondsCounter];
+    maxSecond=secondsCounter;
+  }
+  if(products[secondsCounter]<minProduct) {
+    minProduct=products[secondsCounter];
+    minSecond=secondsCounter;
+  }
   
   for(let second in patterns) {
     if(patterns[second]===robotPatternStr) {
