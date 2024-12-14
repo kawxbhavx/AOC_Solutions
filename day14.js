@@ -72,7 +72,7 @@ let q1Count=0;
 for(let row=0;row<=((tileRows-1)/2)-1;row++) {
   for(let col=0;col<=((tileCols-1)/2)-1;col++) {
     if(robotPattern[row][col]!=".") {
-      q1Count++;
+      q1Count=q1Count+robotPattern[row][col];
     }
   }
 }
@@ -81,7 +81,7 @@ let q2Count=0;
 for(let row=0;row<=((tileRows-1)/2)-1;row++) {
   for(let col=((tileCols-1)/2)+1;col<=tileCols-1;col++) {
     if(robotPattern[row][col]!=".") {
-      q2Count++;
+      q2Count=q2Count+robotPattern[row][col];
     }
   }
 }
@@ -90,7 +90,7 @@ let q3Count=0;
 for(let row=((tileRows-1)/2)+1;row<=tileRows-1;row++) {
   for(let col=0;col<=((tileCols-1)/2)-1;col++) {
     if(robotPattern[row][col]!=".") {
-      q3Count++;
+      q3Count=q3Count+robotPattern[row][col];
     }
   }
 }
@@ -99,7 +99,7 @@ let q4Count=0;
 for(let row=((tileRows-1)/2)+1;row<=tileRows-1;row++) {
   for(let col=((tileCols-1)/2)+1;col<=tileCols-1;col++) {
     if(robotPattern[row][col]!=".") {
-      q4Count++;
+      q4Count=q4Count+robotPattern[row][col];
     }
   }
 }
