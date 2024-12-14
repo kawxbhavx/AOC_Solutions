@@ -156,6 +156,10 @@ let secondsElement=document.createElement("span");
 preNode.before(secondsElement);
 secondsElement.innerText=secondsCounter;
 
+let cntr=setInterval(function() {
+  drawUpdatedPattern();
+}, 10);
+
 function drawUpdatedPattern() {
   for(let robotId in robots) {
     let position=robots[robotId].position;
@@ -187,16 +191,31 @@ function drawUpdatedPattern() {
       robotPattern[position.y][position.x]++;
     }  
   }
-  
-  let robotPatternStr="";
-  robotPattern.forEach(function(patternRow) {
-    robotPatternStr = robotPatternStr + patternRow.join("") + "\n";
-  });
-  preNode.innerText = robotPatternStr;    
+
+  let symmetric=true;
+  for(let row=0;row<=tileRows-1;row++) {    
+    for(let col=0;col<=((tileCols-1)/2)-1;col++) {
+      if(robotPattern[row][col]!=robotPattern[row][tileCols-1-col]) {
+        symmetric=false;
+        break;
+      }
+    }
+    if(!symmetric) {
+      break;
+    }
+  }
+
   secondsCounter++;
   secondsElement.innerText=secondsCounter;
+  
+  if(symmetric) {
+  let robotPatternStr="";
+    robotPattern.forEach(function(patternRow) {
+      robotPatternStr = robotPatternStr + patternRow.join("") + "\n";
+    });
+    preNode.innerText = robotPatternStr;    
+    clearInterval(cntr);
+  }
 }
 
-setInterval(function() {
-  drawUpdatedPattern();
-}, 500);
+
