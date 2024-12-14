@@ -114,7 +114,7 @@ q1Count*q2Count*q3Count*q4Count;
 
 
 
-//part2
+//part2 trial1
 let preNode=document.querySelector('pre');
 let robotDetailsStr = preNode.innerText;
 //let robotDetailsStr = "p=0,4 v=3,-3" + 
@@ -218,7 +218,7 @@ function drawUpdatedPattern() {
   }
 }
 
-//part2
+//part2 working
 let preNode=document.querySelector('pre');
 let robotDetailsStr = preNode.innerText;
 //let robotDetailsStr = "p=0,4 v=3,-3" + 
