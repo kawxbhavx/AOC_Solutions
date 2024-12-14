@@ -158,7 +158,7 @@ secondsElement.innerText=secondsCounter;
 
 let cntr=setInterval(function() {
   drawUpdatedPattern();
-}, 10);
+}, 1);
 
 function drawUpdatedPattern() {
   for(let robotId in robots) {
@@ -207,13 +207,13 @@ function drawUpdatedPattern() {
 
   secondsCounter++;
   secondsElement.innerText=secondsCounter;
-  
-  if(symmetric) {
   let robotPatternStr="";
-    robotPattern.forEach(function(patternRow) {
-      robotPatternStr = robotPatternStr + patternRow.join("") + "\n";
-    });
-    preNode.innerText = robotPatternStr;    
+  robotPattern.forEach(function(patternRow) {
+    robotPatternStr = robotPatternStr + patternRow.join("") + "\n";
+  });
+  preNode.innerText = robotPatternStr;
+  
+  if(symmetric) {  
     clearInterval(cntr);
   }
 }
