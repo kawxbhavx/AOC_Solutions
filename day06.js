@@ -125,7 +125,7 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
   if(patternCopy[obstructionRow][obstructionCol]==="#") {
     return null;
   } else {
-    patternCopy[obstructionRow][obstructionCol]="#";
+    patternCopy[obstructionRow][obstructionCol]="O";
   }
   
   while(row>=0 && row<patternCopy.length && col>=0 && col<patternCopy[0].length) {
@@ -142,7 +142,7 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
       if(direction==="up") {
         if(patternCopy[row-1][col]==="+") {
           return {"status": "looped", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
-        } else if(patternCopy[row-1][col]==="#") {
+        } else if(patternCopy[row-1][col]==="#" || patternCopy[row-1][col]==="O") {
           direction="right";          
           patternCopy[row][col] = "+";
         } else {
@@ -152,7 +152,7 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
       } else if(direction==="right") {
         if(patternCopy[row][col+1]==="+") {
           return {"status": "looped", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
-        } else if(patternCopy[row][col+1]==="#") {
+        } else if(patternCopy[row][col+1]==="#" || patternCopy[row][col+1]==="O") {
           direction="down";          
           patternCopy[row][col] = "+";
         } else {
@@ -162,7 +162,7 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
       } else if(direction==="down") {
         if(patternCopy[row+1][col]==="+") {
           return {"status": "looped", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
-        } else if(patternCopy[row+1][col]==="#") {
+        } else if(patternCopy[row+1][col]==="#" || patternCopy[row+1][col]==="O") {
           direction="left";          
           patternCopy[row][col] = "+";
         } else {
@@ -172,7 +172,7 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
       } else if(direction==="left") {
         if(patternCopy[row][col-1]==="+") {
           return {"status": "looped", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]}
-        } else if(patternCopy[row][col-1]==="#") {
+        } else if(patternCopy[row][col-1]==="#" || patternCopy[row][col-1]==="O") {
           direction="up";          
           patternCopy[row][col] = "+";
         } else {
