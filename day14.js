@@ -355,14 +355,17 @@ function drawUpdatedPattern() {
   }
   if(products[secondsCounter]<minProduct) {
     minProduct=products[secondsCounter];
-    minSecond=secondsCounter;
+    minSecond=secondsCounter;//occurs here due to leastspread
   }
   
   for(let second in patterns) {
     if(patterns[second]===robotPatternStr) {
       if(second!=secondsCounter) {
         clearInterval(cntr);
+        secondsElement.innerText=minSecond;
+        preNode.innerText = products[minSecond];
       }
     }
   }
 }
+
