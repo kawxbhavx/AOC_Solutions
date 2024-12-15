@@ -295,3 +295,99 @@ for(let row=0;row<pattern.length;row++) {
 pattern = pattern.join("\n");
 document.querySelector('pre').innerText = pattern;
 pattern.match(/X/g).length;
+
+
+//part2 refactored
+patternInput = document.querySelector('pre').innerText;
+//patternInput = "....#.....\n.........#\n..........\n..#.......\n.......#..\n..........\n.#..^.....\n........#.\n#.........\n......#...\n";
+patternRows = patternInput.split("\n");
+patternRows.pop();
+let pattern=[];
+for(let row=0;row<patternRows.length;row++) {
+  pattern.push(patternRows[row].split(""));
+}
+
+let rows=pattern.length;
+let cols=pattern[0].length;
+
+let startRow=0;
+let startCol=0;
+let direction="up";
+
+for(startRow=0;startRow<pattern.length;startRow++) {
+  let rowFound=false;
+  for(startCol=0;startCol<pattern[startRow].length;startCol++) {
+    if(pattern[startRow][startCol]==='^') {
+      rowFound=true;      
+      break;
+    }
+  }
+  if(rowFound) {
+    break;
+  }
+}
+
+function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
+  let patternCopy=[];
+  originalPattern.forEach(function(patternRow) {
+    patternCopy.push([...patternRow]);
+  });
+
+  if(patternCopy[obstructionRow][obstructionCol]==="#") {
+    return null;
+  } else {
+    patternCopy[obstructionRow][obstructionCol]="O";
+  }
+
+  l
+  while(row>=0 && row<pattern.length && col>=0 && col<pattern[0].length) {
+    pattern[row][col] = "X";
+    if(direction==="up") {
+      if(row>0) {
+        if(pattern[row-1][col]==="#") {
+          direction="right";
+          col++;
+        } else {         
+          row--;
+        }
+      } else if(row===0) {
+        break;
+      }
+    } else if(direction==="right") {
+      if(col<cols-1) {
+        if(pattern[row][col+1]==="#") {
+          direction="down";
+          row++;
+        } else {
+          col++;              
+        }
+      } else if(col===cols-1) {
+        break;
+      }
+    } else if(direction==="down") {
+      if(col<cols-1) {
+        if(pattern[row+1][col]==="#") {
+          direction="left";
+          col--;
+        } else {
+          row++;          
+        }
+      } else if(row===rows-1) {
+        break;
+      }
+    } else if(direction==="left") {
+      if(col>0) {
+        if(pattern[row][col-1]==="#") {
+          direction="up";
+          row--;
+        } else {          
+          col--;
+        }
+      } else if(col===0) {
+        break;
+      }
+    }
+  }
+}
+
+
