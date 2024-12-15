@@ -241,45 +241,52 @@ for(row=0;row<pattern.length;row++) {
 }
 
 while(row>=0 && row<pattern.length && col>=0 && col<pattern[0].length) {
-  //try {
+    pattern[row][col] = "X";
     if(direction==="up") {
       if(row>0) {
         if(pattern[row-1][col]==="#") {
           direction="right";
-        } else {          
-          pattern[row][col] = "X";      
+          col++;
+        } else {         
           row--;
         }
-      } else {
+      } else if(row===0) {
         break;
       }
     } else if(direction==="right") {
       if(col<cols-1) {
         if(pattern[row][col+1]==="#") {
           direction="down";
+          row++;
         } else {
-          col++;
-          pattern[row][col] = "X";      
+          col++;              
         }
+      } else if(col===cols-1) {
+        break;
       }
     } else if(direction==="down") {
-      if(pattern[row+1][col]==="#") {
-        direction="left";
-      } else {
-        row++;      
-        pattern[row][col] = "X";
+      if(col<cols-1) {
+        if(pattern[row+1][col]==="#") {
+          direction="left";
+          col--;
+        } else {
+          row++;          
+        }
+      } else if(row===rows-1) {
+        break;
       }
     } else if(direction==="left") {
-      if(pattern[row][col-1]==="#") {
-        direction="up";
-      } else {
-        col--;
-        pattern[row][col] = "X";      
+      if(col>0) {
+        if(pattern[row][col-1]==="#") {
+          direction="up";
+          row--;
+        } else {          
+          col--;
+        }
+      } else if(col===0) {
+        break;
       }
     }
-  //} catch (err) {
-    //break;
-  //}
 }
 
 for(let row=0;row<pattern.length;row++) {
