@@ -339,11 +339,18 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
     patternCopy[obstructionRow][obstructionCol]="O";
   }
 
+  let init=true;
   while(row>=0 && row<pattern.length && col>=0 && col<pattern[0].length) {
     patternCopy[row][col] = "X";
+    if(init) {
+      if(obstructionRow===row && obstructionCol===col) {
+        patternCopy[row][col] = "O";
+      }
+      init=false;
+    }
     if(direction==="up") {
       if(row>0) {
-        if(patternCopy[row-1][col]==="#") {
+        if(patternCopy[row-1][col]==="#" || patternCopy[row-1][col]==="O") {
           direction="right";
           col++;
         } else {         
@@ -401,5 +408,5 @@ function drawPattern(updatedPattern) {
   document.querySelector('pre').innerText = updatedPattern;
 }
 
-getExitStatus(pattern,0,0,startRow,startCol);
-
+//getExitStatus(pattern,0,0,startRow,startCol);
+getExitStatus(pattern,6,4,startRow,startCol);
