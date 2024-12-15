@@ -3,7 +3,7 @@ let patternInput = document.querySelector('pre').innerText;
 let warehouse=patternInput.substring(0,patternInput.lastIndexOf("#")+1);
 let moves=patternInput.substring(patternInput.lastIndexOf("#")+1);
 
-let warehouse="##########"+
+//let warehouse="##########"+
 "\n#..O..O.O#"+
 "\n#......O.#"+
 "\n#.OO..O.O#"+
@@ -14,7 +14,7 @@ let warehouse="##########"+
 "\n#....O...#"+
 "\n##########";
 
-let moves="<vv>^<v^>v>^vv^v>v<>v^v<v<^vv<<<^><<><>>v<vvv<>^v^>^<<<><<v<<<v^vv^v>^"+
+//let moves="<vv>^<v^>v>^vv^v>v<>v^v<v<^vv<<<^><<><>>v<vvv<>^v^>^<<<><<v<<<v^vv^v>^"+
 "\nvvv<<^>^v^^><<>>><>^<<><^vv^^<>vvv<>><^^v>^>vv<>v<<<<v<^v>^<^^>>>^<v<v"+
 "\n><>vv>v^v^<>><>>>><^^>vv>v<^^^>>v^v^<^^>v^^>v^<^v>v<>>v^v^<v>v^^<^^vv<"+
 "\n<<v<^>>^^^^>>>v^<>vvv^><v<<<>^^^vv^<vvv>^>v<^^^^v<>^>vvvv><>>v^<<^^^^^"+
@@ -139,4 +139,26 @@ function generateMove(patternRow) {
     }
   }
 }
-  
+
+let gpsSum=0;
+for(let row=1;row<rows-1;row++) {
+  for(let col=1;col<cols-1;col++) {
+    if(warehousePattern[row][col]===box) {
+      gpsSum=gpsSum+((row*100) + col);
+    }
+  }
+}
+console.log(gpsSum);
+
+let patternOutput="";
+warehousePattern.forEach(function(patternRow) {
+  patternOutput = patternOutput + patternRow.join("") + "\n";
+});
+document.querySelector('pre').innerText=patternOutput;
+
+//part2
+let scaledWarehouse=warehouse.replaceAll("#","##");
+scaledWarehouse=scaledWarehouse.replaceAll("O","[]");
+scaledWarehouse=scaledWarehouse.replaceAll(".","..");
+scaledWarehouse=scaledWarehouse.replaceAll("@","@.");
+document.querySelector('pre').innerText=scaledWarehouse;
