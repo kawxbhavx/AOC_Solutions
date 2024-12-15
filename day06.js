@@ -339,7 +339,6 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
     patternCopy[obstructionRow][obstructionCol]="O";
   }
 
-  l
   while(row>=0 && row<pattern.length && col>=0 && col<pattern[0].length) {
     pattern[row][col] = "X";
     if(direction==="up") {
@@ -351,7 +350,7 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
           row--;
         }
       } else if(row===0) {
-        break;
+        return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]};
       }
     } else if(direction==="right") {
       if(col<cols-1) {
@@ -362,7 +361,7 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
           col++;              
         }
       } else if(col===cols-1) {
-        break;
+        return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]};
       }
     } else if(direction==="down") {
       if(col<cols-1) {
@@ -373,7 +372,7 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
           row++;          
         }
       } else if(row===rows-1) {
-        break;
+        return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]};
       }
     } else if(direction==="left") {
       if(col>0) {
@@ -384,10 +383,11 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
           col--;
         }
       } else if(col===0) {
-        break;
+        return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]};
       }
     }
   }
 }
 
+getExitStatus(pattern,0,0,startRow,startCol);
 
