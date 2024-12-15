@@ -340,53 +340,65 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
   }
 
   while(row>=0 && row<pattern.length && col>=0 && col<pattern[0].length) {
-    pattern[row][col] = "X";
+    patternCopy[row][col] = "X";
     if(direction==="up") {
       if(row>0) {
-        if(pattern[row-1][col]==="#") {
+        if(patternCopy[row-1][col]==="#") {
           direction="right";
           col++;
         } else {         
           row--;
         }
       } else if(row===0) {
+        drawPattern(patternCopy);
         return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]};
       }
     } else if(direction==="right") {
       if(col<cols-1) {
-        if(pattern[row][col+1]==="#") {
+        if(patternCopy[row][col+1]==="#") {
           direction="down";
           row++;
         } else {
           col++;              
         }
       } else if(col===cols-1) {
+        drawPattern(patternCopy);
         return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]};
       }
     } else if(direction==="down") {
       if(col<cols-1) {
-        if(pattern[row+1][col]==="#") {
+        if(patternCopy[row+1][col]==="#") {
           direction="left";
           col--;
         } else {
           row++;          
         }
       } else if(row===rows-1) {
+        drawPattern(patternCopy);
         return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]};
       }
     } else if(direction==="left") {
       if(col>0) {
-        if(pattern[row][col-1]==="#") {
+        if(patternCopy[row][col-1]==="#") {
           direction="up";
           row--;
         } else {          
           col--;
         }
       } else if(col===0) {
+        drawPattern(patternCopy);
         return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]};
       }
     }
   }
+}
+
+function drawPattern(updatedPattern) {
+  for(let row=0;row<updatedPattern.length;row++) {
+    updatedPattern[row] = updatedPattern[row].join("");
+  }
+  updatedPattern = updatedPattern.join("\n");
+  document.querySelector('pre').innerText = updatedPattern;
 }
 
 getExitStatus(pattern,0,0,startRow,startCol);
