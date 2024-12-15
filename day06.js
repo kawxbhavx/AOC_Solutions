@@ -366,7 +366,7 @@ function getExitStatus(originalPattern,obstructionRow,obstructionCol,row,col) {
         return {"status": "exited", "obstruction":[obstructionRow,obstructionCol], "finalPosition": [row,col]};
       }
     } else if(direction==="down") {
-      if(col<cols-1) {
+      if(row<rows-1) {
         if(patternCopy[row+1][col]==="#") {
           direction="left";
           col--;
