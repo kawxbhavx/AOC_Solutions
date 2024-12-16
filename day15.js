@@ -3,6 +3,10 @@ let patternInput = document.querySelector('pre').innerText;
 let warehouse=patternInput.substring(0,patternInput.lastIndexOf("#")+1);
 let moves=patternInput.substring(patternInput.lastIndexOf("#")+1);
 
+let movesElement=document.createElement("span");
+document.querySelector('pre').before(movesElement);
+movesElement.innerText="Current Move:     Next Move:";
+
 //let warehouse="##########"+
 "\n#..O..O.O#"+
 "\n#......O.#"+
@@ -68,6 +72,12 @@ for(startRow=0;startRow<rows;startRow++) {
 }
 
 for(let i=0;i<moves.length;i++) {
+  if(i<moves.length-1) {
+    movesElement.innerText="Current Move:" + moves[i] + "     Next Move:" + moves[i+1];
+  } else {
+    movesElement.innerText="Current Move:" + moves[i];
+  }
+  
   if(moves[i]==="<") {
     let warehouseRow=[...warehousePattern[startRow]];
     generateMove(warehouseRow);
@@ -107,6 +117,8 @@ for(let i=0;i<moves.length;i++) {
     });
     startRow=warehouseRow.indexOf(robot);
   }
+  drawPattern();
+  debugger;
 }
 
 function generateMove(patternRow) {
@@ -150,11 +162,13 @@ for(let row=1;row<rows-1;row++) {
 }
 console.log(gpsSum);
 
-let patternOutput="";
-warehousePattern.forEach(function(patternRow) {
-  patternOutput = patternOutput + patternRow.join("") + "\n";
-});
-document.querySelector('pre').innerText=patternOutput;
+function drawPattern() {
+  let patternOutput="";
+  warehousePattern.forEach(function(patternRow) {
+    patternOutput = patternOutput + patternRow.join("") + "\n";
+  });
+  document.querySelector('pre').innerText=patternOutput;
+}
 
 //part2
 let scaledWarehouse=warehouse.replaceAll("#","##");
@@ -234,7 +248,7 @@ for(let i=0;i<moves.length;i++) {
   }
 }
 
-function generateMove(patternRow) {
+function generateHMove(patternRow) {
   let nearestWallIndex=patternRow.lastIndexOf(wall,patternRow.lastIndexOf(robot)-1);
   for(let col=0;col<nearestWallIndex;col++) {
     if(patternRow[col]===space) {
