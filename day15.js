@@ -74,14 +74,14 @@ for(startRow=0;startRow<rows;startRow++) {
 let moveNumber=0;
 let cntr=setInterval(function() {
   performNthMove(moveNumber);
-}, 500);
+}, 200);
 
 function performNthMove() {
 //for(let moveNumber=0;moveNumber<moves.length;moveNumber++) {
   if(moveNumber<moves.length-1) {
-    movesElement.innerText="Current Move:" + moves[moveNumber] + "     Next Move:" + moves[moveNumber+1];
+    movesElement.innerText="Total Moves:" + moves.length + "     Current Move(" + (moveNumber+1) + "):" + moves[moveNumber] + "     Next Move:" + moves[moveNumber+1];
   } else {
-    movesElement.innerText="Current Move:" + moves[moveNumber];
+    movesElement.innerText="Total Moves:" + moves.length + "     Current Move(" + (moveNumber+1) + "):" + moves[moveNumber];
   }
   
   if(moves[moveNumber]==="<") {
