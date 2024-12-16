@@ -71,21 +71,27 @@ for(startRow=0;startRow<rows;startRow++) {
   }
 }
 
-for(let i=0;i<moves.length;i++) {
-  if(i<moves.length-1) {
-    movesElement.innerText="Current Move:" + moves[i] + "     Next Move:" + moves[i+1];
+let moveNumber=0;
+let cntr=setInterval(function() {
+  performNthMove(moveNumber);
+}, 500);
+
+function performNthMove() {
+//for(let moveNumber=0;moveNumber<moves.length;moveNumber++) {
+  if(moveNumber<moves.length-1) {
+    movesElement.innerText="Current Move:" + moves[moveNumber] + "     Next Move:" + moves[moveNumber+1];
   } else {
-    movesElement.innerText="Current Move:" + moves[i];
+    movesElement.innerText="Current Move:" + moves[moveNumber];
   }
   
-  if(moves[i]==="<") {
+  if(moves[moveNumber]==="<") {
     let warehouseRow=[...warehousePattern[startRow]];
     generateMove(warehouseRow);
     warehouseRow.forEach(function(element,index) {
       warehousePattern[startRow][index]=element;
     });
     startCol=warehouseRow.indexOf(robot);
-  } else if(moves[i]==="^") {
+  } else if(moves[moveNumber]==="^") {
     let warehouseRow=[];
     for(let row=0;row<rows;row++) {
       warehouseRow.push(warehousePattern[row][startCol]);
@@ -95,7 +101,7 @@ for(let i=0;i<moves.length;i++) {
       warehousePattern[index][startCol]=element;
     });
     startRow=warehouseRow.indexOf(robot);
-  } else if(moves[i]===">") {
+  } else if(moves[moveNumber]===">") {
     let warehouseRow=[...warehousePattern[startRow]];
     warehouseRow.reverse();
     generateMove(warehouseRow);
@@ -104,7 +110,7 @@ for(let i=0;i<moves.length;i++) {
       warehousePattern[startRow][index]=element;
     });
     startCol=warehouseRow.indexOf(robot);
-  } else if(moves[i]==="v") {
+  } else if(moves[moveNumber]==="v") {
     let warehouseRow=[];
     for(let row=0;row<rows;row++) {
       warehouseRow.push(warehousePattern[row][startCol]);
@@ -118,7 +124,11 @@ for(let i=0;i<moves.length;i++) {
     startRow=warehouseRow.indexOf(robot);
   }
   drawPattern();
-  debugger;
+  if(moveNumber===moves.length) {
+    clearInterval(cntr);
+  } else {
+    moveNumber++;
+  }
 }
 
 function generateMove(patternRow) {
