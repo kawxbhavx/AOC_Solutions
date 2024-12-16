@@ -162,3 +162,119 @@ scaledWarehouse=scaledWarehouse.replaceAll("O","[]");
 scaledWarehouse=scaledWarehouse.replaceAll(".","..");
 scaledWarehouse=scaledWarehouse.replaceAll("@","@.");
 document.querySelector('pre').innerText=scaledWarehouse;
+
+let scaledWarehousePattern=[];
+scaledWarehouse.split("\n").forEach(function(scaledWarehouseRow) {
+  scaledWarehousePattern.push(scaledWarehouseRow.split(""));
+});
+
+let scaledStartRow=0;
+let scaledStartCol=0;
+let scaledRows=scaledWarehousePattern.length;
+let scaledCols=scaledWarehousePattern[0].length;
+
+let boxStart="[";
+let boxEnd="]";
+
+for(scaledStartRow=0;scaledStartRow<scaledRows;scaledStartRow++) {
+  let rowFound=false;
+  for(scaledStartCol=0;scaledStartCol<scaledCols;scaledStartCol++) {
+    if(warehousePattern[scaledStartRow][scaledStartCol]===robot) {
+      rowFound=true;      
+      break;
+    }
+  }
+  if(rowFound) {
+    break;
+  }
+}
+
+
+
+
+for(let i=0;i<moves.length;i++) {
+  if(moves[i]==="<") {
+    let warehouseRow=[...warehousePattern[startRow]];
+    generateMove(warehouseRow);
+    warehouseRow.forEach(function(element,index) {
+      warehousePattern[startRow][index]=element;
+    });
+    startCol=warehouseRow.indexOf(robot);
+  } else if(moves[i]==="^") {
+    let warehouseRow=[];
+    for(let row=0;row<rows;row++) {
+      warehouseRow.push(warehousePattern[row][startCol]);
+    }
+    generateMove(warehouseRow);
+    warehouseRow.forEach(function(element,index) {
+      warehousePattern[index][startCol]=element;
+    });
+    startRow=warehouseRow.indexOf(robot);
+  } else if(moves[i]===">") {
+    let warehouseRow=[...warehousePattern[startRow]];
+    warehouseRow.reverse();
+    generateMove(warehouseRow);
+    warehouseRow.reverse();
+    warehouseRow.forEach(function(element,index) {
+      warehousePattern[startRow][index]=element;
+    });
+    startCol=warehouseRow.indexOf(robot);
+  } else if(moves[i]==="v") {
+    let warehouseRow=[];
+    for(let row=0;row<rows;row++) {
+      warehouseRow.push(warehousePattern[row][startCol]);
+    }
+    warehouseRow.reverse();
+    generateMove(warehouseRow);
+    warehouseRow.reverse();
+    warehouseRow.forEach(function(element,index) {
+      warehousePattern[index][startCol]=element;
+    });
+    startRow=warehouseRow.indexOf(robot);
+  }
+}
+
+function generateMove(patternRow) {
+  let nearestWallIndex=patternRow.lastIndexOf(wall,patternRow.lastIndexOf(robot)-1);
+  for(let col=0;col<nearestWallIndex;col++) {
+    if(patternRow[col]===space) {
+      patternRow[col]=imaginaryWall;
+    }
+  }
+  let nearestSpaceIndex=patternRow.lastIndexOf(space,patternRow.lastIndexOf(robot)-1);
+  if(nearestSpaceIndex>0) {
+    let hasBox=false;
+    let robotCol=patternRow.indexOf(robot);
+    for(let col=nearestSpaceIndex;col<robotCol;col++) {
+      if(patternRow[col]===box) {
+        hasBox=true;
+        break;
+      }
+    }
+    if(hasBox) {
+      patternRow[nearestSpaceIndex]=box;
+    }
+    patternRow[robotCol]=space;
+    robotCol--;    
+    patternRow[robotCol]=robot;
+  }
+  for(let col=0;col<cols;col++) {
+    if(patternRow[col]===imaginaryWall) {
+      patternRow[col]=space;
+    }
+  }
+}
+
+
+
+
+
+let scaledGpsSum=0;
+for(let row=1;row<scaledRows-1;row++) {
+  for(let col=1;col<scaledCols-1;col++) {
+    if(warehousePattern[row][col]===box) {
+      scaledGpsSum=scaledGpsSum+((row*100) + col);
+    }
+  }
+}
+console.log(scaledGpsSum);
