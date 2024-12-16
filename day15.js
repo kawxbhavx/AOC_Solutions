@@ -73,7 +73,8 @@ for(startRow=0;startRow<rows;startRow++) {
 
 let moveNumber=0;
 let cntr=setInterval(function() {
-  performNthMove(moveNumber);
+  //performNthMove(moveNumber);
+  performNthScaledMove(moveNumber);
 }, 200);
 
 function performNthMove() {
@@ -171,14 +172,6 @@ function generateMove(patternRow) {
   }
 }
 
-function drawPattern() {
-  let patternOutput="";
-  warehousePattern.forEach(function(patternRow) {
-    patternOutput = patternOutput + patternRow.join("") + "\n";
-  });
-  document.querySelector('pre').innerText=patternOutput;
-}
-
 //part2
 let scaledWarehouse=warehouse.replaceAll("#","##");
 scaledWarehouse=scaledWarehouse.replaceAll("O","[]");
@@ -191,6 +184,15 @@ scaledWarehouse.split("\n").forEach(function(scaledWarehouseRow) {
   scaledWarehousePattern.push(scaledWarehouseRow.split(""));
 });
 
+function drawPattern() {
+  let patternOutput="";
+  //warehousePattern.forEach(function(patternRow) {
+  scaledWarehousePattern.forEach(function(patternRow) {
+    patternOutput = patternOutput + patternRow.join("") + "\n";
+  });
+  document.querySelector('pre').innerText=patternOutput;
+}
+
 let scaledStartRow=0;
 let scaledStartCol=0;
 let scaledRows=scaledWarehousePattern.length;
@@ -202,7 +204,7 @@ let boxEnd="]";
 for(scaledStartRow=0;scaledStartRow<scaledRows;scaledStartRow++) {
   let rowFound=false;
   for(scaledStartCol=0;scaledStartCol<scaledCols;scaledStartCol++) {
-    if(warehousePattern[scaledStartRow][scaledStartCol]===robot) {
+    if(scaledWarehousePattern[scaledStartRow][scaledStartCol]===robot) {
       rowFound=true;      
       break;
     }
@@ -213,47 +215,67 @@ for(scaledStartRow=0;scaledStartRow<scaledRows;scaledStartRow++) {
 }
 
 
-
-
-for(let i=0;i<moves.length;i++) {
-  if(moves[i]==="<") {
-    let warehouseRow=[...warehousePattern[startRow]];
-    generateMove(warehouseRow);
-    warehouseRow.forEach(function(element,index) {
-      warehousePattern[startRow][index]=element;
+function performNthScaledMove() {
+//for(let i=0;i<moves.length;i++) {
+  if(moveNumber<moves.length-1) {
+    movesElement.innerText="Total Moves:" + moves.length + "     Current Move(" + (moveNumber+1) + "):" + moves[moveNumber] + "     Next Move:" + moves[moveNumber+1];
+  } else {
+    movesElement.innerText="Total Moves:" + moves.length + "     Current Move(" + (moveNumber+1) + "):" + moves[moveNumber];
+  }
+  
+  if(moves[moveNumber]==="<") {
+    let scaledWarehouseRow=[...scaledWarehousePattern[scaledStartRow]];
+    generateHMove(scaledWarehouseRow);
+    scaledWarehouseRow.forEach(function(element,index) {
+      scaledWarehousePattern[scaledStartRow][index]=element;
     });
-    startCol=warehouseRow.indexOf(robot);
-  } else if(moves[i]==="^") {
-    let warehouseRow=[];
+    scaledStartCol=scaledWarehouseRow.indexOf(robot);
+  } else if(moves[moveNumber]==="^") {
+    let scaledWarehouseRow=[];
     for(let row=0;row<rows;row++) {
-      warehouseRow.push(warehousePattern[row][startCol]);
+      scaledWarehouseRow.push(scaledWarehousePattern[row][scaledStartCol]);
     }
-    generateMove(warehouseRow);
-    warehouseRow.forEach(function(element,index) {
-      warehousePattern[index][startCol]=element;
+    generateMove(scaledWarehouseRow);
+    scaledWarehouseRow.forEach(function(element,index) {
+      scaledWarehousePattern[index][scaledStartCol]=element;
     });
-    startRow=warehouseRow.indexOf(robot);
-  } else if(moves[i]===">") {
-    let warehouseRow=[...warehousePattern[startRow]];
-    warehouseRow.reverse();
-    generateMove(warehouseRow);
-    warehouseRow.reverse();
-    warehouseRow.forEach(function(element,index) {
-      warehousePattern[startRow][index]=element;
+    scaledStartRow=scaledWarehouseRow.indexOf(robot);
+  } else if(moves[moveNumber]===">") {
+    let scaledWarehouseRow=[...scaledWarehousePattern[scaledStartRow]];
+    scaledWarehouseRow.reverse();
+    generateHMove(scaledWarehouseRow);
+    scaledWarehouseRow.reverse();
+    scaledWarehouseRow.forEach(function(element,index) {
+      scaledWarehousePattern[scaledStartRow][index]=element;
     });
-    startCol=warehouseRow.indexOf(robot);
-  } else if(moves[i]==="v") {
-    let warehouseRow=[];
+    scaledStartCol=scaledWarehouseRow.indexOf(robot);
+  } else if(moves[moveNumber]==="v") {
+    let scaledWarehouseRow=[];
     for(let row=0;row<rows;row++) {
-      warehouseRow.push(warehousePattern[row][startCol]);
+      scaledWarehouseRow.push(scaledWarehousePattern[row][scaledStartCol]);
     }
-    warehouseRow.reverse();
-    generateMove(warehouseRow);
-    warehouseRow.reverse();
-    warehouseRow.forEach(function(element,index) {
-      warehousePattern[index][startCol]=element;
+    scaledWarehouseRow.reverse();
+    generateMove(scaledWarehouseRow);
+    scaledWarehouseRow.reverse();
+    scaledWarehouseRow.forEach(function(element,index) {
+      scaledWarehousePattern[index][scaledStartCol]=element;
     });
-    startRow=warehouseRow.indexOf(robot);
+    scaledStartRow=scaledWarehouseRow.indexOf(robot);
+  }
+  drawPattern();
+  if(moveNumber===moves.length) {
+    clearInterval(cntr);
+    let scaledGpsSum=0;
+    for(let row=1;row<scaledRows-1;row++) {
+      for(let col=1;col<scaledCols-1;col++) {
+        if(scaledWarehousePattern[row][col]===box) {
+          scaledGpsSum=scaledGpsSum+((row*100) + col);
+        }
+      }
+    }
+    console.log(scaledGpsSum);
+  } else {
+    moveNumber++;
   }
 }
 
@@ -269,13 +291,13 @@ function generateHMove(patternRow) {
     let hasBox=false;
     let robotCol=patternRow.indexOf(robot);
     for(let col=nearestSpaceIndex;col<robotCol;col++) {
-      if(patternRow[col]===box) {
+      if(patternRow[col]===boxStart) {
         hasBox=true;
         break;
       }
     }
     if(hasBox) {
-      patternRow[nearestSpaceIndex]=box;
+      patternRow[nearestSpaceIndex]=boxStart;
     }
     patternRow[robotCol]=space;
     robotCol--;    
@@ -287,17 +309,3 @@ function generateHMove(patternRow) {
     }
   }
 }
-
-
-
-
-
-let scaledGpsSum=0;
-for(let row=1;row<scaledRows-1;row++) {
-  for(let col=1;col<scaledCols-1;col++) {
-    if(warehousePattern[row][col]===box) {
-      scaledGpsSum=scaledGpsSum+((row*100) + col);
-    }
-  }
-}
-console.log(scaledGpsSum);
