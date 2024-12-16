@@ -39,6 +39,7 @@ movesElement.innerText="Current Move:     Next Move:";
 "\n########";
 
 //let moves="<^^>>>vv<v>>v<<\n";
+moves=">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
 
 moves=moves.replaceAll("\n","");
 
@@ -75,7 +76,7 @@ let moveNumber=0;
 let cntr=setInterval(function() {
   //performNthMove(moveNumber);
   performNthScaledMove(moveNumber);
-}, 200);
+}, 100);
 
 function performNthMove() {
 //for(let moveNumber=0;moveNumber<moves.length;moveNumber++) {
@@ -288,20 +289,9 @@ function generateHMove(patternRow) {
   }
   let nearestSpaceIndex=patternRow.lastIndexOf(space,patternRow.lastIndexOf(robot)-1);
   if(nearestSpaceIndex>0) {
-    let hasBox=false;
     let robotCol=patternRow.indexOf(robot);
-    for(let col=nearestSpaceIndex;col<robotCol;col++) {
-      if(patternRow[col]===boxStart) {
-        hasBox=true;
-        break;
-      }
-    }
-    if(hasBox) {
-      patternRow[nearestSpaceIndex]=boxStart;
-    }
-    patternRow[robotCol]=space;
-    robotCol--;    
-    patternRow[robotCol]=robot;
+    patternRow.splice(nearestSpaceIndex,1);
+    patternRow.splice(robotCol,0,space);
   }
   for(let col=0;col<cols;col++) {
     if(patternRow[col]===imaginaryWall) {
