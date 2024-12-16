@@ -126,6 +126,15 @@ function performNthMove() {
   drawPattern();
   if(moveNumber===moves.length) {
     clearInterval(cntr);
+    let gpsSum=0;
+    for(let row=1;row<rows-1;row++) {
+      for(let col=1;col<cols-1;col++) {
+        if(warehousePattern[row][col]===box) {
+          gpsSum=gpsSum+((row*100) + col);
+        }
+      }
+    }
+    console.log(gpsSum);
   } else {
     moveNumber++;
   }
@@ -161,16 +170,6 @@ function generateMove(patternRow) {
     }
   }
 }
-
-let gpsSum=0;
-for(let row=1;row<rows-1;row++) {
-  for(let col=1;col<cols-1;col++) {
-    if(warehousePattern[row][col]===box) {
-      gpsSum=gpsSum+((row*100) + col);
-    }
-  }
-}
-console.log(gpsSum);
 
 function drawPattern() {
   let patternOutput="";
