@@ -193,3 +193,40 @@ for(let plantType in areasByPlantType) {
 }
 
 
+//part1 approach 3
+let preNode=document.querySelector('pre');
+//preNode.innerText = fieldInput;
+let fieldInput = preNode.innerText;
+// let fieldInput = 
+//   "AAAA\n" + 
+//   "BBCD\n" +
+//   "BBCC\n" +
+//   "EEEC\n";
+// let fieldInput = 
+//   "OOOOO\n" +
+//   "OXOXO\n" +
+//   "OOOOO\n" +
+//   "OXOXO\n" +
+//   "OOOOO\n";
+let fieldInput = 
+  "RRRRIICCFF\n" +
+  "RRRRIICCCF\n" +
+  "VVRRRCCFFF\n" +
+  "VVRCCCJFFF\n" +
+  "VVVVCJJCFE\n" +
+  "VVIVCCJJEE\n" +
+  "VVIIICJJEE\n" +
+  "MIIIIIJJEE\n" +
+  "MIIISIJEEE\n" +
+  "MMMISSJEEE\n";
+fieldRows = fieldInput.split("\n");
+fieldRows.pop();
+function generatePattern(patternRows) {
+  let pattern=[];
+  for(let row=0;row<patternRows.length;row++) {
+    pattern.push(patternRows[row].split(""));
+  }
+  return pattern;
+}
+
+let pattern = generatePattern(fieldRows);
