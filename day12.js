@@ -230,3 +230,30 @@ function generatePattern(patternRows) {
 }
 
 let pattern = generatePattern(fieldRows);
+let rows=pattern.length;
+let cols=pattern[0].length;
+let cells=[];
+let marker=0;
+
+for(let row=0;row<rows;row++) {
+  marker++;
+  cells.push({
+    "id":row*cols,
+    "row": row,
+    "col":0,
+    "marker":marker,
+    "plantType": pattern[row][0]
+  });
+  for(let col=1;col<cols;col++) {
+    if(pattern[row][col]!=pattern[row][col-1]) {
+      marker++;
+    }
+    cells.push({
+      "id":((row*cols)+col),
+      "row": row,
+      "col":col,
+      "marker":marker,
+      "plantType": pattern[row][col]
+    });
+  }
+}
