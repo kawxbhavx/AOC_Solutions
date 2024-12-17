@@ -256,11 +256,37 @@ for(let row=0;row<rows;row++) {
       "plantType": pattern[row][col]
     });
   }
+}
 
-  for(let row=rows-1;row>0;row--) {
-    for(let col=cols-1;col>=0;col--) {
-      if(pattern[row][col]===pattern[row-1][col]) {
-        
+for(let row=rows-1;row>0;row--) {
+  for(let col=cols-1;col>=0;col--) {
+    if(pattern[row][col]===pattern[row-1][col]) {
+      let currentCell=getCellByRowCol(row,col);
+      let upperCell=getCellByRowCol(row-1,col);
+      let currentCellMarker=currentCell.marker;
+      let upperCellMarker=upperCell.marker;
+      for(let i=0;i<cells.length;i++) {
+        if(cells[i].marker===currentCellMarker) {
+          cells[i].marker=upperCellMarker;
+        }
       }
     }
   }
+}
+
+function getCellByRowCol(row,col) {
+  for(let i=0;i<cells.length;i++) {
+    if(cells[i].row===row && cells[i].col===col) {
+      return cells[i];
+    }
+  }
+}
+
+let areas={};
+for(let i=0;i<cells.length;i++) {
+  if(areas.hasOwnProperty(cells[i].marker)) {
+    areas[cells[i].marker].push(cells[i]);
+  } else {
+    areas[cells[i].marker]=[cells[i]];
+  }
+}
