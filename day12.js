@@ -256,4 +256,11 @@ for(let row=0;row<rows;row++) {
       "plantType": pattern[row][col]
     });
   }
-}
+
+  for(let row=rows-1;row>0;row--) {
+    for(let col=cols-1;col>=0;col--) {
+      if(pattern[row][col]===pattern[row-1][col]) {
+        
+      }
+    }
+  }
