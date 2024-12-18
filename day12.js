@@ -352,7 +352,7 @@ function drawPattern(marker) {
     }    
   }
   perimeters[marker]=areaPerimeter;
-  cost=cost + (markerAreas[marker]*areaPerimeter;
+  cost=cost + (markerAreas[marker]*areaPerimeter);
 
   let filteredPatternStr="";
   blankPattern.forEach(function(patternRow) {
