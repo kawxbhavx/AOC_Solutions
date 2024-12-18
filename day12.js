@@ -292,8 +292,10 @@ for(let i=0;i<cells.length;i++) {
 }
 
 let markers=Object.keys(areas);
+let markerAreas={};
 for(let i=0;i<markers.length;i++) {
   markers[i]=parseInt(markers[i]);
+  markerAreas[markers[i]]=areas[markers[i]].length;
 }
 let markerIndex=0;
 
