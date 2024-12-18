@@ -301,6 +301,8 @@ let cntr=setInterval(function() {
   drawPattern(markers[markerIndex]);  
 }, 200);
 
+let perimeters={};
+
 function drawPattern(marker) {
   //debugger;
   let blankPattern=[];
@@ -312,11 +314,11 @@ function drawPattern(marker) {
     for(let col=0;col<cols;col++) {
       let cell=getCellByRowCol(row,col);
       if(cell.marker===marker) {
-        blankPattern[row][col]=cell.plantType;
-        
+        blankPattern[row][col]=cell.plantType;        
       }
     }
   }
+  
 
   let filteredPatternStr="";
   blankPattern.forEach(function(patternRow) {
