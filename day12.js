@@ -292,17 +292,17 @@ for(let i=0;i<cells.length;i++) {
 }
 
 let markers=Object.keys(areas);
+for(let i=0;i<markers.length;i++) {
+  markers[i]=parseInt(markers[i]);
+}
 let markerIndex=0;
 
 let cntr=setInterval(function() {
-  drawPattern(markers[markerIndex]);
-  markerIndex++;
-  if(markerIndex===markers.length) {
-    clearInterval(cntr);
-  }
+  drawPattern(markers[markerIndex]);  
 }, 200);
 
 function drawPattern(marker) {
+  //debugger;
   let blankPattern=[];
   pattern.forEach(function(patternRow) {
     blankPattern.push(".".repeat(cols).split(""));
@@ -313,6 +313,7 @@ function drawPattern(marker) {
       let cell=getCellByRowCol(row,col);
       if(cell.marker===marker) {
         blankPattern[row][col]=cell.plantType;
+        
       }
     }
   }
@@ -322,4 +323,9 @@ function drawPattern(marker) {
     filteredPatternStr = filteredPatternStr + patternRow.join("") + "\n";
   });
   preNode.innerText = filteredPatternStr;
+
+  markerIndex++;
+  if(markerIndex===markers.length) {
+    clearInterval(cntr);
+  }
 }
