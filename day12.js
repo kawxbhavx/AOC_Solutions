@@ -208,17 +208,17 @@ let fieldInput = preNode.innerText;
 //   "OOOOO\n" +
 //   "OXOXO\n" +
 //   "OOOOO\n";
-let fieldInput = 
-  "RRRRIICCFF\n" +
-  "RRRRIICCCF\n" +
-  "VVRRRCCFFF\n" +
-  "VVRCCCJFFF\n" +
-  "VVVVCJJCFE\n" +
-  "VVIVCCJJEE\n" +
-  "VVIIICJJEE\n" +
-  "MIIIIIJJEE\n" +
-  "MIIISIJEEE\n" +
-  "MMMISSJEEE\n";
+// let fieldInput = 
+//   "RRRRIICCFF\n" +
+//   "RRRRIICCCF\n" +
+//   "VVRRRCCFFF\n" +
+//   "VVRCCCJFFF\n" +
+//   "VVVVCJJCFE\n" +
+//   "VVIVCCJJEE\n" +
+//   "VVIIICJJEE\n" +
+//   "MIIIIIJJEE\n" +
+//   "MIIISIJEEE\n" +
+//   "MMMISSJEEE\n";
 fieldRows = fieldInput.split("\n");
 fieldRows.pop();
 function generatePattern(patternRows) {
@@ -289,4 +289,37 @@ for(let i=0;i<cells.length;i++) {
   } else {
     areas[cells[i].marker]=[cells[i]];
   }
+}
+
+let markers=Object.keys(areas);
+let markerIndex=0;
+
+let cntr=setInterval(function() {
+  drawPattern(markers[markerIndex]);
+  markerIndex++;
+  if(markerIndex===markers.length) {
+    clearInterval(cntr);
+  }
+}, 200);
+
+function drawPattern(marker) {
+  let blankPattern=[];
+  pattern.forEach(function(patternRow) {
+    blankPattern.push(".".repeat(cols).split(""));
+  });
+
+  for(let row=0;row<rows;row++) {
+    for(let col=0;col<cols;col++) {
+      let cell=getCellByRowCol(row,col);
+      if(cell.marker===marker) {
+        blankPattern[row][col]=cell.plantType;
+      }
+    }
+  }
+
+  let filteredPatternStr="";
+  blankPattern.forEach(function(patternRow) {
+    filteredPatternStr = filteredPatternStr + patternRow.join("") + "\n";
+  });
+  preNode.innerText = filteredPatternStr;
 }
