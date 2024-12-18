@@ -304,6 +304,7 @@ let cntr=setInterval(function() {
 }, 200);
 
 let perimeters={};
+let cost=0;
 
 function drawPattern(marker) {
   //debugger;
@@ -320,7 +321,38 @@ function drawPattern(marker) {
       }
     }
   }
-  
+
+  let areaPerimeter=0;
+  for(let row=0;row<rows;row++) {
+    for(let col=0;col<cols;col++) {
+      if(blankPattern[row][col]!=".") {
+        let cellPerimeter=4;
+        if(row>0) {
+          if(blankPattern[row][col]===blankPattern[row-1][col]) {
+            cellPerimeter--;
+          }
+        }
+        if(row<rows-1) {
+          if(blankPattern[row][col]===blankPattern[row+1][col]) {
+            cellPerimeter--;
+          }
+        }
+        if(col>0) {
+          if(blankPattern[row][col]===blankPattern[row][col-1]) {
+            cellPerimeter--;
+          }
+        }
+        if(col<cols-1) {
+          if(blankPattern[row][col]===blankPattern[row][col+1]) {
+            cellPerimeter--;
+          }
+        }
+        areaPerimeter=areaPerimeter+cellPerimeter;
+      }
+    }    
+  }
+  perimeters[marker]=areaPerimeter;
+  cost=cost + (markerAreas[marker]*areaPerimeter;
 
   let filteredPatternStr="";
   blankPattern.forEach(function(patternRow) {
