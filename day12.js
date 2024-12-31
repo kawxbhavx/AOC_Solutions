@@ -365,3 +365,6 @@ function drawPattern(marker) {
     clearInterval(cntr);
   }
 }
+
+
+//test
